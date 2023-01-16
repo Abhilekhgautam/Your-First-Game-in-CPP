@@ -185,11 +185,7 @@ Let us look at things in some detail,
 x coordinate to the velocity, but in fact, what we really do is,</p>
 <pre><code>X = X + Velocity * cos(theta)
 </code></pre>
-<p>Where <code>theta</code> = angle between x-axis and the direction we move in.</p>
-<h3 id="but-why-costheta"><a class="header" href="#but-why-costheta">But why cos(theta)?</a></h3>
-<p>This is because, <code>Velocity * Cos(theta)</code> is said to be horizontal
-component of the velocity which is responsible for the horizontal
-movement.</p>
+<p>Where <code>theta</code> = angle between x-axis and the direction we move in, which is 0.</p>
 <p>so, X turns out to be,</p>
 <pre><code>X = X + Velocity * cos(0)
   = X + Velocity
@@ -205,7 +201,7 @@ So in this case,</p>
 <pre><code>Y = Y + Velocity * Cos(0)
   = Y + Velocity
 </code></pre>
-<p>Now let us focus on diagonal movements now,
+<p>Now let us focus on diagonal movements,
 <img src="../image/diagonal-movement.png" alt="diagonal movement" /></p>
 <p>When we move diagonally, there is change in both X and Y coordinate,
 to calculate them, we will simply use the concept we used earlier,</p>

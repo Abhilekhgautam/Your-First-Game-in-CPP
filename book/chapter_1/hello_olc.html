@@ -142,21 +142,16 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="hello-olc"><a class="header" href="#hello-olc">Hello, OLC!</a></h1>
-<p>It is time to write your first program using olc::PixelGameEngine. How can we break the tradition, we will start by writing a simple Hello, World program.</p>
-<h2 id="creating-a-new-directory"><a class="header" href="#creating-a-new-directory">Creating a New Directory</a></h2>
-<p>Begin by making a directory to store your Code. I'll name it 'Space Warrior' thats the name of the game we are going to create.</p>
-<h2 id="for-linux"><a class="header" href="#for-linux">For Linux</a></h2>
-<pre><code class="language-shell">$ mkdir ~/Space-Warrior
-$ cd ~/Space-Warrior
-</code></pre>
-<h2 id="adding-the-required-header"><a class="header" href="#adding-the-required-header">Adding the required Header</a></h2>
-<p>We will then add the olcPixelEamEengine.h header in our directory which you can download <a href="https://github.com/OneLoneCoder/olcPixelGameEngine">here</a>.</p>
-<h2 id="create-a-new-cpp-file"><a class="header" href="#create-a-new-cpp-file">Create a new cpp file</a></h2>
-<p>We will now create a new cpp file I will name it main.cpp.</p>
-<pre><code class="language-shell">$ touch ~/Space-Warrior/main.cpp
-</code></pre>
+<p>It's time to write your first program using <a href="https://github.com/OneLoneCoder/olcPixelGameEngine">olc::PixelGameEngine</a>. how can we break the tradition, we will start by writing a simple <em>Hello, World</em> program.</p>
+<h2 id="setting-up-the-project"><a class="header" href="#setting-up-the-project">Setting up the Project</a></h2>
+<ul>
+<li>Begin by making a directory to store your Code. I'll name it <em>Space Warrior</em> that will be the name of the game we are going to create</li>
+<li>Add Header file <code>olcPixelGameEngine.h</code> to our current directory which you can download <a href="https://github.com/OneLoneCoder/olcPixelGameEngine">here</a>.</li>
+<li>Create a new <code>.cpp</code> file, name it <code>main.cpp</code> in the current direcotry.</li>
+</ul>
 <h2 id="hello-world"><a class="header" href="#hello-world">Hello, World!</a></h2>
-<p>We begin by adding the required header</p>
+<p>Add following contents to the <code>main.cpp</code> file.
+We begin by including the header <code>olcPixelGameEngine</code></p>
 <pre><code class="language-cpp">#define OLC_PGE_APPLICATION
 #include &quot;olcPixelGameEngine.h&quot;
 </code></pre>
@@ -195,17 +190,66 @@ get into details later.</p>
 	return 0;
 }
 </code></pre>
+<h2 id="compilation-and-running-the-program"><a class="header" href="#compilation-and-running-the-program">Compilation and Running the Program</a></h2>
+<p>If you have everything setup as mentioned in the chapter <em>Write your First Game in C++</em>, you should be
+able to issue following commands in the <em>terminal/command prompt</em>.</p>
+<h3 id="for-linux"><a class="header" href="#for-linux">For Linux</a></h3>
+<p>You should move on to the current directory first.</p>
+<h4 id="compiling"><a class="header" href="#compiling">Compiling</a></h4>
+<pre><code class="language-shell">$ g++ -o main main.cpp -lX11 -lGL -lpthread -lpng -lstdc++fs -std=c++17
+</code></pre>
+<h4 id="running"><a class="header" href="#running">Running</a></h4>
+<pre><code class="language-shell">$ ./main
+</code></pre>
+<h3 id="for-windows"><a class="header" href="#for-windows">For Windows</a></h3>
+<p>You should move on to the current working directory first.</p>
+<h4 id="compiling-1"><a class="header" href="#compiling-1">Compiling</a></h4>
+<pre><code class="language-shell">$ g++ -o main.exe main.cpp -luser32 -lgdi32 -lopengl32 -lgdiplus -lShlwapi -ldwmapi -lstdc++fs -static -std=c++17
+</code></pre>
+<h4 id="running-1"><a class="header" href="#running-1">Running</a></h4>
+<pre><code class="language-shell">$ main.exe
+</code></pre>
 <p>That's it now if you run this program, you should see a window with string &quot;Hello, World&quot; being displayed like this:</p>
 <p><img src="../image/hello-olc.png" alt="Hello OLC" /></p>
 <h2 id="getting-into-details"><a class="header" href="#getting-into-details">Getting into Details</a></h2>
 <p>As mentioned earlier we inherited our class from <code>olc::PixelGameEngine</code> and then we override two functions,</p>
 <h3 id="onusercreate"><a class="header" href="#onusercreate">OnUserCreate()</a></h3>
-<p>This function is called only once by the engine at the start so we will use this function to initialize our stuff, for now we have nothing
-to initialize, so we just return <code>true</code> from the function.</p>
+<p>The function <code>OnUserCreate</code> is called only once by the engine at the start.
+Let us look at the definition again,</p>
+<pre><code class="language-cpp">bool OnUserCreate() override
+ {
+     // Called once at the start, so create things here
+     return true;
+ }
+</code></pre>
+<p>This function returns a <code>bool</code> value, since the function is called only once, we can use this
+for the initialization stuff. However at the moment we have nothing to initialize, so we will
+just return <code>true</code> from the method.</p>
 <h3 id="onuserupdate"><a class="header" href="#onuserupdate">OnUserUpdate()</a></h3>
-<p>This function is called repeatedly by the engine per frame. For smooth transition of the game, we need to keep updating the frame and whenever the frame is updated this function is called. We will talk about this in more details later.</p>
+<p>This function is called repeatedly by the engine per frame. For smooth transition of the game, we need to keep updating the frame and whenever the frame is updated this function is called.
+Let us check out the code of <code>OnUserUpdate</code> method again,</p>
+<pre><code class="language-cpp">bool OnUserUpdate(float fElapsedTime) override
+ {
+   Clear(olc::BLACK);
+   DrawString(5,5, &quot;Hello, World&quot;);	
+   return true;
+ }
+</code></pre>
+<p>Let us look at the function signature first, it returns a <code>bool</code> value, recieves a <code>float</code> as a
+parameter. We call the <code>Clear</code> function inside the function, <code>Clear</code> function clears contents of the
+previous frame We then called <code>DrawString</code> function and passed in the <code>x</code>, <code>y</code> coordinates where the   string would be displayed, and then the third parameter, <code>Hello, World</code> is the string to be displayed   in the screen. We exit the function by returning <code>true</code>.</p>
 <h3 id="the-main-function"><a class="header" href="#the-main-function">The main function</a></h3>
-<p>In the main Function, we first create an object game, of type Game. We then need to tell the olc::PixelGameEngine about the size of window we want to create we do so by using the<code>Construct</code> method. The <code>Construct</code> method returns <code>true</code> if the construction was successfull and then we call the <code>start</code> method which starts our game engine.</p>
+<pre><code class="language-cpp">int main()
+{
+    Game game;
+    if (game.Construct(256, 240, 4, 4))
+        game.Start();
+
+    return 0;
+}
+</code></pre>
+<p>In the main Function, we first created an object game, of type Game. We then need to tell the engine about the size of window we want to create we do so by using the<code>Construct</code> method. The <code>Construct</code> method returns <code>true</code> if the construction was successfull and then we call the <code>start</code> method which starts our game engine.</p>
+<p>Next up we will look at some useful functions to draw basic shapes using the game engine.</p>
 
                     </main>
 

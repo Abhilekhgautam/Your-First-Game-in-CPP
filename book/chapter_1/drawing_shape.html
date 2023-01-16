@@ -148,36 +148,41 @@
 <p>To draw a line use the <code>DrawLine</code> Method</p>
 <pre><code class="language-cpp">DrawLine(5,5, 30, 30);
 </code></pre>
+<p><img src="../image/draw-line.png" alt="DrawLine Demo" /></p>
 <p><code>DrawLine</code> has a signature of:</p>
 <pre><code class="language-cpp">DrawLine(int32_t x1, int32_t y1, int32_t x2, int32_t y2, Pixel p = olc::WHITE, uint32_t pattern = 0xFFFFFFFF)
 </code></pre>
-<p>It simply draws a line from (x1,y1) to (x2,y2)</p>
+<p>It simply draws a line from <code>(x1,y1)</code> to <code>(x2,y2)</code></p>
 <h2 id="drawing-a-circle"><a class="header" href="#drawing-a-circle">Drawing a Circle</a></h2>
 <p>To draw a circle use the <code>DrawCircle</code> Method</p>
 <pre><code class="language-cpp">DrawCircle(50, 50, 5);
 </code></pre>
+<p><img src="../image/draw-circle.png" alt="DrawCircle" /></p>
 <p>DrawCircle has a signature of </p>
 <pre><code class="language-cpp">DrawCircle(int32_t x, int32_t y, int32_t radius, Pixel p = olc::WHITE, uint8_t mask = 0xFF)
 </code></pre>
-<p>It simply draws a cirle centered at (x, y) with a radius.</p>
+<p>It simply draws a cirle centered at <code>(x, y)</code> with a radius.</p>
 <h2 id="drawing-a-filled-circle"><a class="header" href="#drawing-a-filled-circle">Drawing a Filled Circle</a></h2>
 <p>As we might have guessed just call the <code>FillCircle</code> Method</p>
 <pre><code class="language-cpp">FillCircle(50, 50, 5, olc::RED);
 </code></pre>
+<p><img src="../image/fill-circle.png" alt="FillCircle" /></p>
 <p>We passed an additional parameter, the color of the pixel to fill with.</p>
 <h2 id="drawing-a-rectangle"><a class="header" href="#drawing-a-rectangle">Drawing a Rectangle</a></h2>
 <p>We use <code>DrawRect</code> method.</p>
 <pre><code class="language-cpp">DrawRect(5,5, 30, 40);
 </code></pre>
-<p>It draws a rectangle at (5,5) with a width of 30 and height of 40.</p>
+<p><img src="../image/draw-rect.png" alt="DrawRect" />
+It draws a rectangle at <code>(5,5)</code> with a width of 30 and height of 40.</p>
 <h2 id="drawing-a-triangle"><a class="header" href="#drawing-a-triangle">Drawing a Triangle</a></h2>
 <p>We use DrawTriangle method.</p>
 <pre><code class="language-cpp">DrawTriangle(5,5,20,5, 12,10);
 </code></pre>
-<p><code>DrawTriangle</code> has following signature</p>
+<p><img src="../image/draw-triangle.png" alt="DrawTrianlge" />
+<code>DrawTriangle</code> has following signature:</p>
 <pre><code class="language-cpp">DrawTriangle(int32_t x1, int32_t y1, int32_t x2, int32_t y2, int32_t x3, int32_t y3, Pixel p = olc::WHITE)
 </code></pre>
-<p>It simply draws a triangle between three points (x1, y1), (x2, y2) and (x3, y3);</p>
+<p>It simply draws a triangle between three points <code>(x1, y1)</code>, <code>(x2, y2)</code> and <code>(x3, y3)</code>;</p>
 
                     </main>
 

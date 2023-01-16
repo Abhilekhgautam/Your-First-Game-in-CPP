@@ -171,6 +171,37 @@ A enemy is killed when</p>
 <p>So just add the following line where the above condition matches in the <code>OnUserUpdate</code> function.</p>
 <pre><code class="language-cpp">life_count = life_count - 1;
 </code></pre>
+<h2 id="drawing-the-life-sprite"><a class="header" href="#drawing-the-life-sprite">Drawing the Life Sprite</a></h2>
+<p>We will use a the following sprite to represent the life count of a player</p>
+<p><img src="../image/life.png" alt="Life Sprite" /></p>
+<p>First we need to create a private member variable, sprLife to store a pointer to object
+of type <code>olc::Sprite</code></p>
+<pre><code class="language-cpp">std::unique_ptr&lt;olc::Sprite&gt; sprLife;
+</code></pre>
+<p>and then on <code>OnUserUpdate</code> method we assign <code>sprLife</code> as:</p>
+<pre><code class="language-cpp">bool OnUserCreate() override
+{
+  produceEnemy();
+  sprPlayer = std::make_unique&lt;olc::Sprite&gt;(&quot;/home/abhilekh/Downloads/player.png&quot;);
+  sprEnemy = std::make_unique&lt;olc::Sprite&gt;(&quot;/home/abhilekh/Downloads/enemy.png&quot;);
+  sprLife  = std::make_unique&lt;olc::Sprite&gt;(&quot;/home/abhilekh/Downloads/life.png&quot;);
+  
+  return true;
+}
+</code></pre>
+<p>To draw this sprite, we will use <code>DrawSprite</code> method, but the number of sprites to be displayed
+depends on the <code>life_count</code>, so will use a <code>for</code> loop here,</p>
+<pre><code class="language-cpp">// load life sprite..
+for (int i = 0; i &lt; life_count; ++i) {
+  DrawSprite(270 + sprLife-&gt;width + 25 * i, 5, sprLife.get());
+}
+</code></pre>
+<p>We just passed in the <code>x</code>, <code>y</code> coordinate where the sprite is to be drawn and the
+pointer to the object of type <code>olc::Sprite</code>.</p>
+<p>Now if you compile and run the program, you should see something like this
+<img src="../image/life-score-demo.png" alt="Score and Life Demo" /></p>
+<p>All the codes till now, can be found <a href="https://gist.github.com/Abhilekhgautam/889718740c2628d4e571fd0edf6e2799">here</a></p>
+<p>Next up we will work on polishing the game.</p>
 
                     </main>
 

@@ -143,16 +143,16 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="write-your-first-game-in-c"><a class="header" href="#write-your-first-game-in-c">Write your First Game in C++</a></h1>
-<p>By Abhilekh Gautam</p>
-<p>Are you tired of writing console based programs in C++ and want to use C++ for more fun, then this is for you.</p>
-<p>At the end of this book you will have a fully fledged 2D game for you.</p>
-<p>To write this game we will use OLC Pixel Game Engine and some C++ 17.</p>
-<p>For more about olc Pixel Game engine visit: <a href="https://github.com/OneLoneCoder/olcPixelGameEngine">here</a></p>
-<p>The entire source code of the game is available at : <a href="https://github.com/Abhilekhgautam/Space-Warrior">https://github.com/Abhilekhgautam/space-warrior</a></p>
-<h2 id="prequisites"><a class="header" href="#prequisites">Prequisites</a></h2>
-<p>A Simple Understanding of C++ would work. You should be aware of Inheritance in C++. We will try to use as much modern C++ as Possible. </p>
+<p>By: <em>Abhilekh Gautam</em></p>
+<p>Are you tired of writing console based programs in C++ and want to use C++ for more fun, then this book is for you. At the end of this book you will have a fully fledged working 2D game for you.To write this game we will use olc::PixelGameEngine and some Modern C++.</p>
+<p>For more about olc::PixelGameEngine visit <a href="https://github.com/OneLoneCoder/olcPixelGameEngine">here</a>.</p>
+<p>The entire source code of the game is available <a href="https://github.com/Abhilekhgautam/Space-Warrior">here</a>.</p>
+<h2 id="prerequisites"><a class="header" href="#prerequisites">Prerequisites</a></h2>
+<ul>
+<li>A Simple Understanding of C++ would work. You should be aware of Inheritance in C++. We will try to use as much modern C++ as Possible. </li>
+</ul>
 <h2 id="setup"><a class="header" href="#setup">Setup</a></h2>
-<p>Since we will be using OLC Pixel Game Engine for this purpose we will need to set it up. This won't be covered in book as everything about that is available in its official docs.</p>
+<p>Since we will be using olc::PixelGameEngine for this purpose we will need to set it up. This won't be covered in this book as everything about that is available in its official docs.</p>
 <h3 id="for-linux"><a class="header" href="#for-linux">For Linux</a></h3>
 <p>To get things done on Linux, Visit:
 <a href="https://github.com/OneLoneCoder/olcPixelGameEngine/wiki/Compiling-on-Linux">Compiling on Linux</a></p>
@@ -161,30 +161,26 @@
 <a href="https://github.com/OneLoneCoder/olcPixelGameEngine/wiki/Compiling-on-Windows-with-Other-Compilers">Compiling on Windows</a></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="foreword"><a class="header" href="#foreword">Foreword</a></h1>
 <p>Let me tell you here, I am neither a Game Developer nor a C++ Expert. I like writing C++ and I know I am pretty bad at it. If you are here to learn writing production ready code then this is not the right place for you.</p>
-<p>But I am sure this won't be a waste of time if you continue till the end after all we will be writing a 2D C++ game. That should be fun.</p>
+<p>But I am sure this won't be a waste of time if you continue till the end. After all we will be writing a 2D game. That should be fun.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="introduction"><a class="header" href="#introduction">Introduction</a></h1>
-<p>Welcome to 'Write your First Game in C++'. The main objective of this book is to have some fun with C++. C++ is considered to be difficult and boring by many. The reason to find it boring is many universities (in Nepal) are teaching C++98/03 and are bounding them in writing console based programs which brings the vibe that C++ is useless among many.</p>
-<p>This book is to remind you that C++ is not boring at all. You will see why soon.</p>
+<p>Welcome to <em>Write your First Game in C++</em>. The main objective of this book is to have some fun with C++. C++ is considered to be difficult and boring by many. The reason to find it boring is many universities (in Nepal) are teaching C++98/03 and are bounding them in writing console based programs which brings the vibe that C++ is useless among many.</p>
+<p>This book is to remind you that C++ is not boring at all. You will see why soon. This book also aims
+to serve as as a teaching (learning) material, for those who want to start having fun with C++ and programming overall.</p>
 <h2 id="who-is-this-book-for"><a class="header" href="#who-is-this-book-for">Who is this book for?</a></h2>
 <p>This book is intended for everyone who wish to have fun with C++.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="getting-started"><a class="header" href="#getting-started">Getting Started</a></h1>
 <p>If you have everything setup, Lets begin your Game development journey.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="hello-olc"><a class="header" href="#hello-olc">Hello, OLC!</a></h1>
-<p>It is time to write your first program using olc::PixelGameEngine. How can we break the tradition, we will start by writing a simple Hello, World program.</p>
-<h2 id="creating-a-new-directory"><a class="header" href="#creating-a-new-directory">Creating a New Directory</a></h2>
-<p>Begin by making a directory to store your Code. I'll name it 'Space Warrior' thats the name of the game we are going to create.</p>
-<h2 id="for-linux-1"><a class="header" href="#for-linux-1">For Linux</a></h2>
-<pre><code class="language-shell">$ mkdir ~/Space-Warrior
-$ cd ~/Space-Warrior
-</code></pre>
-<h2 id="adding-the-required-header"><a class="header" href="#adding-the-required-header">Adding the required Header</a></h2>
-<p>We will then add the olcPixelEamEengine.h header in our directory which you can download <a href="https://github.com/OneLoneCoder/olcPixelGameEngine">here</a>.</p>
-<h2 id="create-a-new-cpp-file"><a class="header" href="#create-a-new-cpp-file">Create a new cpp file</a></h2>
-<p>We will now create a new cpp file I will name it main.cpp.</p>
-<pre><code class="language-shell">$ touch ~/Space-Warrior/main.cpp
-</code></pre>
+<p>It's time to write your first program using <a href="https://github.com/OneLoneCoder/olcPixelGameEngine">olc::PixelGameEngine</a>. how can we break the tradition, we will start by writing a simple <em>Hello, World</em> program.</p>
+<h2 id="setting-up-the-project"><a class="header" href="#setting-up-the-project">Setting up the Project</a></h2>
+<ul>
+<li>Begin by making a directory to store your Code. I'll name it <em>Space Warrior</em> that will be the name of the game we are going to create</li>
+<li>Add Header file <code>olcPixelGameEngine.h</code> to our current directory which you can download <a href="https://github.com/OneLoneCoder/olcPixelGameEngine">here</a>.</li>
+<li>Create a new <code>.cpp</code> file, name it <code>main.cpp</code> in the current direcotry.</li>
+</ul>
 <h2 id="hello-world"><a class="header" href="#hello-world">Hello, World!</a></h2>
-<p>We begin by adding the required header</p>
+<p>Add following contents to the <code>main.cpp</code> file.
+We begin by including the header <code>olcPixelGameEngine</code></p>
 <pre><code class="language-cpp">#define OLC_PGE_APPLICATION
 #include &quot;olcPixelGameEngine.h&quot;
 </code></pre>
@@ -223,17 +219,66 @@ get into details later.</p>
 	return 0;
 }
 </code></pre>
+<h2 id="compilation-and-running-the-program"><a class="header" href="#compilation-and-running-the-program">Compilation and Running the Program</a></h2>
+<p>If you have everything setup as mentioned in the chapter <em>Write your First Game in C++</em>, you should be
+able to issue following commands in the <em>terminal/command prompt</em>.</p>
+<h3 id="for-linux-1"><a class="header" href="#for-linux-1">For Linux</a></h3>
+<p>You should move on to the current directory first.</p>
+<h4 id="compiling"><a class="header" href="#compiling">Compiling</a></h4>
+<pre><code class="language-shell">$ g++ -o main main.cpp -lX11 -lGL -lpthread -lpng -lstdc++fs -std=c++17
+</code></pre>
+<h4 id="running"><a class="header" href="#running">Running</a></h4>
+<pre><code class="language-shell">$ ./main
+</code></pre>
+<h3 id="for-windows-1"><a class="header" href="#for-windows-1">For Windows</a></h3>
+<p>You should move on to the current working directory first.</p>
+<h4 id="compiling-1"><a class="header" href="#compiling-1">Compiling</a></h4>
+<pre><code class="language-shell">$ g++ -o main.exe main.cpp -luser32 -lgdi32 -lopengl32 -lgdiplus -lShlwapi -ldwmapi -lstdc++fs -static -std=c++17
+</code></pre>
+<h4 id="running-1"><a class="header" href="#running-1">Running</a></h4>
+<pre><code class="language-shell">$ main.exe
+</code></pre>
 <p>That's it now if you run this program, you should see a window with string &quot;Hello, World&quot; being displayed like this:</p>
 <p><img src="chapter_1/../image/hello-olc.png" alt="Hello OLC" /></p>
 <h2 id="getting-into-details"><a class="header" href="#getting-into-details">Getting into Details</a></h2>
 <p>As mentioned earlier we inherited our class from <code>olc::PixelGameEngine</code> and then we override two functions,</p>
 <h3 id="onusercreate"><a class="header" href="#onusercreate">OnUserCreate()</a></h3>
-<p>This function is called only once by the engine at the start so we will use this function to initialize our stuff, for now we have nothing
-to initialize, so we just return <code>true</code> from the function.</p>
+<p>The function <code>OnUserCreate</code> is called only once by the engine at the start.
+Let us look at the definition again,</p>
+<pre><code class="language-cpp">bool OnUserCreate() override
+ {
+     // Called once at the start, so create things here
+     return true;
+ }
+</code></pre>
+<p>This function returns a <code>bool</code> value, since the function is called only once, we can use this
+for the initialization stuff. However at the moment we have nothing to initialize, so we will
+just return <code>true</code> from the method.</p>
 <h3 id="onuserupdate"><a class="header" href="#onuserupdate">OnUserUpdate()</a></h3>
-<p>This function is called repeatedly by the engine per frame. For smooth transition of the game, we need to keep updating the frame and whenever the frame is updated this function is called. We will talk about this in more details later.</p>
+<p>This function is called repeatedly by the engine per frame. For smooth transition of the game, we need to keep updating the frame and whenever the frame is updated this function is called.
+Let us check out the code of <code>OnUserUpdate</code> method again,</p>
+<pre><code class="language-cpp">bool OnUserUpdate(float fElapsedTime) override
+ {
+   Clear(olc::BLACK);
+   DrawString(5,5, &quot;Hello, World&quot;);	
+   return true;
+ }
+</code></pre>
+<p>Let us look at the function signature first, it returns a <code>bool</code> value, recieves a <code>float</code> as a
+parameter. We call the <code>Clear</code> function inside the function, <code>Clear</code> function clears contents of the
+previous frame We then called <code>DrawString</code> function and passed in the <code>x</code>, <code>y</code> coordinates where the   string would be displayed, and then the third parameter, <code>Hello, World</code> is the string to be displayed   in the screen. We exit the function by returning <code>true</code>.</p>
 <h3 id="the-main-function"><a class="header" href="#the-main-function">The main function</a></h3>
-<p>In the main Function, we first create an object game, of type Game. We then need to tell the olc::PixelGameEngine about the size of window we want to create we do so by using the<code>Construct</code> method. The <code>Construct</code> method returns <code>true</code> if the construction was successfull and then we call the <code>start</code> method which starts our game engine.</p>
+<pre><code class="language-cpp">int main()
+{
+    Game game;
+    if (game.Construct(256, 240, 4, 4))
+        game.Start();
+
+    return 0;
+}
+</code></pre>
+<p>In the main Function, we first created an object game, of type Game. We then need to tell the engine about the size of window we want to create we do so by using the<code>Construct</code> method. The <code>Construct</code> method returns <code>true</code> if the construction was successfull and then we call the <code>start</code> method which starts our game engine.</p>
+<p>Next up we will look at some useful functions to draw basic shapes using the game engine.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="drawing-basic-shapes"><a class="header" href="#drawing-basic-shapes">Drawing Basic Shapes</a></h1>
 <p>Before we start writing our Game, let us see some useful functions provided by olc pixel game engine that help us in drawing shape.</p>
 <p>Note: I won't be providing full working code, just add these codes to the <code>OnUserUpdate</code> function and that would work.</p>
@@ -241,36 +286,41 @@ to initialize, so we just return <code>true</code> from the function.</p>
 <p>To draw a line use the <code>DrawLine</code> Method</p>
 <pre><code class="language-cpp">DrawLine(5,5, 30, 30);
 </code></pre>
+<p><img src="chapter_1/../image/draw-line.png" alt="DrawLine Demo" /></p>
 <p><code>DrawLine</code> has a signature of:</p>
 <pre><code class="language-cpp">DrawLine(int32_t x1, int32_t y1, int32_t x2, int32_t y2, Pixel p = olc::WHITE, uint32_t pattern = 0xFFFFFFFF)
 </code></pre>
-<p>It simply draws a line from (x1,y1) to (x2,y2)</p>
+<p>It simply draws a line from <code>(x1,y1)</code> to <code>(x2,y2)</code></p>
 <h2 id="drawing-a-circle"><a class="header" href="#drawing-a-circle">Drawing a Circle</a></h2>
 <p>To draw a circle use the <code>DrawCircle</code> Method</p>
 <pre><code class="language-cpp">DrawCircle(50, 50, 5);
 </code></pre>
+<p><img src="chapter_1/../image/draw-circle.png" alt="DrawCircle" /></p>
 <p>DrawCircle has a signature of </p>
 <pre><code class="language-cpp">DrawCircle(int32_t x, int32_t y, int32_t radius, Pixel p = olc::WHITE, uint8_t mask = 0xFF)
 </code></pre>
-<p>It simply draws a cirle centered at (x, y) with a radius.</p>
+<p>It simply draws a cirle centered at <code>(x, y)</code> with a radius.</p>
 <h2 id="drawing-a-filled-circle"><a class="header" href="#drawing-a-filled-circle">Drawing a Filled Circle</a></h2>
 <p>As we might have guessed just call the <code>FillCircle</code> Method</p>
 <pre><code class="language-cpp">FillCircle(50, 50, 5, olc::RED);
 </code></pre>
+<p><img src="chapter_1/../image/fill-circle.png" alt="FillCircle" /></p>
 <p>We passed an additional parameter, the color of the pixel to fill with.</p>
 <h2 id="drawing-a-rectangle"><a class="header" href="#drawing-a-rectangle">Drawing a Rectangle</a></h2>
 <p>We use <code>DrawRect</code> method.</p>
 <pre><code class="language-cpp">DrawRect(5,5, 30, 40);
 </code></pre>
-<p>It draws a rectangle at (5,5) with a width of 30 and height of 40.</p>
+<p><img src="chapter_1/../image/draw-rect.png" alt="DrawRect" />
+It draws a rectangle at <code>(5,5)</code> with a width of 30 and height of 40.</p>
 <h2 id="drawing-a-triangle"><a class="header" href="#drawing-a-triangle">Drawing a Triangle</a></h2>
 <p>We use DrawTriangle method.</p>
 <pre><code class="language-cpp">DrawTriangle(5,5,20,5, 12,10);
 </code></pre>
-<p><code>DrawTriangle</code> has following signature</p>
+<p><img src="chapter_1/../image/draw-triangle.png" alt="DrawTrianlge" />
+<code>DrawTriangle</code> has following signature:</p>
 <pre><code class="language-cpp">DrawTriangle(int32_t x1, int32_t y1, int32_t x2, int32_t y2, int32_t x3, int32_t y3, Pixel p = olc::WHITE)
 </code></pre>
-<p>It simply draws a triangle between three points (x1, y1), (x2, y2) and (x3, y3);</p>
+<p>It simply draws a triangle between three points <code>(x1, y1)</code>, <code>(x2, y2)</code> and <code>(x3, y3)</code>;</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="adding-our-player"><a class="header" href="#adding-our-player">Adding Our Player</a></h1>
 <p>Now on, we will start working on our game, let us start by adding our main player.</p>
 <p>We will use <code>olc::sprite</code> to add our player, just think <code>sprite</code> as an <code>image</code>but before this let us initialize some member variables for our class.</p>
@@ -485,11 +535,11 @@ Then let us add a vector to the private field of class, I will name it vEnemy.</
 </code></pre>
 <p>Similarly, update the <code>OnUserCreate</code> method to</p>
 <pre><code class="language-cpp">bool OnUserCreate() override
-    {
-      sprPlayer = std::make_unique&lt;olc::Sprite&gt;(&quot;/home/abhilekh/Downloads/player.png&quot;);
-      sprEnemy = std::make_unique&lt;olc::Sprite&gt;(&quot;/home/abhilekh/Downloads/enemy.png&quot;);
-      return true;
-    }
+{
+  sprPlayer = std::make_unique&lt;olc::Sprite&gt;(&quot;/home/abhilekh/Downloads/player.png&quot;);
+  sprEnemy = std::make_unique&lt;olc::Sprite&gt;(&quot;/home/abhilekh/Downloads/enemy.png&quot;);
+  return true;
+}
 </code></pre>
 <h2 id="positioning-the-enemies"><a class="header" href="#positioning-the-enemies">Positioning the Enemies</a></h2>
 <p>The <code>enemy</code> struct has two fields to represent its coordinate axis, we will simply need to assign them with some values, and draw sprites in those positions.</p>
@@ -543,24 +593,28 @@ a pointer to <code>olc::sprite</code> object.</p>
 <pre><code class="language-cpp">bool OnUserUpdate(float fElapsedTime) override
 {
   DrawSprite(fPlayerPositionX, fPlayerPositionY, sprPlayer.get());
-  if (GetKey(olc::Key::LEFT).bHeld) {
-      fPlayerPositionX = fPlayerPositionX - fPlayerVel * fElapsedTime;
+  if (GetKey(olc::Key::LEFT).bHeld)
+  {
+    fPlayerPositionX = fPlayerPositionX - fPlayerVel * fElapsedTime;
+  }
+  if (GetKey(olc::Key::RIGHT).bHeld)
+  {
+    fPlayerPositionX = fPlayerPositionX + fPlayerVel * fElapsedTime;
+  }
+  if (GetKey(olc::Key::UP).bHeld) {
+    fPlayerPositionY = fPlayerPositionY - fPlayerVel * fElapsedTime;
    }
-   if (GetKey(olc::Key::RIGHT).bHeld) {
-      fPlayerPositionX = fPlayerPositionX + fPlayerVel * fElapsedTime;
-    }
-   if (GetKey(olc::Key::UP).bHeld) {
-      fPlayerPositionY = fPlayerPositionY - fPlayerVel * fElapsedTime;
-    }
-    if (GetKey(olc::Key::DOWN).bHeld) {
-      fPlayerPositionY = fPlayerPositionY + fPlayerVel * fElapsedTime;
-    }
+  if (GetKey(olc::Key::DOWN).bHeld)
+  {
+    fPlayerPositionY = fPlayerPositionY + fPlayerVel * fElapsedTime;
+  }
 
-    for (auto elm: vEnemy) {
-       if (elm.alive)
-          DrawSprite(elm.x, elm.y, sprEnemy.get());
-    }
-  return true;
+  for (auto elm: vEnemy)
+  {
+     if (elm.alive)
+       DrawSprite(elm.x, elm.y, sprEnemy.get());
+  }
+ return true;
 }
 </code></pre>
 <p>And now if you compile and run the program you should see something like this,
@@ -613,8 +667,10 @@ center of image we should add up half the width of the image to its top left pos
 <p>We will simply use a circle with the radius set to 1, as a bullet.
 Similar to drawing enemies, we will use loop here, as we have a collection
 of bullets.</p>
-<pre><code class="language-cpp">for (auto &amp;elm: vBullet) {
-  if (elm.y &gt; -1 &amp;&amp; !elm.dead) {
+<pre><code class="language-cpp">for (auto &amp;elm: vBullet)
+{
+  if (elm.y &gt; -1 &amp;&amp; !elm.dead) 
+  {
     FillCircle(elm.x, elm.y, 1, olc::RED);
   }
 }
@@ -626,12 +682,14 @@ variable that represents the bullet velocity, I will name it fBulletVel, and set
 </code></pre>
 <p>Moving the bullet means translating its position, since bullets will be fired upward we will be 
 subtracting the y coordinate of the bullet with its speed, i.e.</p>
-<pre><code class="language-cpp">for (auto &amp;elm: vBullet) {
+<pre><code class="language-cpp">for (auto &amp;elm: vBullet)
+{
   // only take care of bullets which are visible on the screen
-   if (elm.y &gt; -1 &amp;&amp; !elm.dead) {
+   if (elm.y &gt; -1 &amp;&amp; !elm.dead) 
+   {
      FillCircle(int(elm.x), int(elm.y), 1, olc::RED);
      elm.y = elm.y - fBulletVel * fElapsedTime;
- }
+   }
 }
 </code></pre>
 <p>We don't need to draw bullets that are gone away from the screen display area, so used the if condition to ensure it.
@@ -641,9 +699,9 @@ Remember that, we just multiply <code>fElapsedTime</code> with the velocity of t
 #include &quot;olcPixelGameEngine.h&quot;
 
 struct Enemy{
-    float x;
-    float y;
-    bool alive;
+  float x;
+  float y;
+  bool alive;
 };
 
 struct Bullet{
@@ -655,21 +713,24 @@ struct Bullet{
 class Game : public olc::PixelGameEngine
 {
 public:
-    Game(){
+    Game()
+    {
         sAppName = &quot;Space Warrior&quot;;
     }
 
-    void produceEnemy() {
-        for (int i = 0; i &lt; 70; ++i) {
-            if (i &lt; 18)
-                vEnemy.emplace_back(Enemy{float(ScreenWidth()) / 2 + (float) i * 10 - 100, 40.0f, true});
-            else if (i &lt; 36)
-                vEnemy.emplace_back(Enemy{float(ScreenWidth()) / 2 + 10.0f * (float) i - 280, 55.0f, true});
-            else if (i &lt; 54)
-                vEnemy.emplace_back(Enemy{float(ScreenWidth()) / 2 + 10.0f * (float) i - 460, 75.0f, true});
-            else
-                vEnemy.emplace_back(Enemy{float(ScreenWidth()) / 2 + 10.0f * (float) i - 640, 95.0f, true});
-        }
+    void produceEnemy() 
+    {
+      for (int i = 0; i &lt; 70; ++i)
+      {
+         if (i &lt; 18)
+           vEnemy.emplace_back(Enemy{float(ScreenWidth()) / 2 + (float) i * 10 - 100, 40.0f, true});
+         else if (i &lt; 36)
+           vEnemy.emplace_back(Enemy{float(ScreenWidth()) / 2 + 10.0f * (float) i - 280, 55.0f, true});
+         else if (i &lt; 54)
+           vEnemy.emplace_back(Enemy{float(ScreenWidth()) / 2 + 10.0f * (float) i - 460, 75.0f, true});
+         else
+           vEnemy.emplace_back(Enemy{float(ScreenWidth()) / 2 + 10.0f * (float) i - 640, 95.0f, true});
+      }
     }
 
 
@@ -686,16 +747,16 @@ public:
         Clear(olc::BLACK);
         DrawSprite(fPlayerPositionX, fPlayerPositionY, sprPlayer.get());
         if (GetKey(olc::Key::LEFT).bHeld) {
-                fPlayerPositionX = fPlayerPositionX - fPlayerVel * fElapsedTime;
+            fPlayerPositionX = fPlayerPositionX - fPlayerVel * fElapsedTime;
         }
         if (GetKey(olc::Key::RIGHT).bHeld) {
-                fPlayerPositionX = fPlayerPositionX + fPlayerVel * fElapsedTime;
+            fPlayerPositionX = fPlayerPositionX + fPlayerVel * fElapsedTime;
         }
         if (GetKey(olc::Key::UP).bHeld) {
             fPlayerPositionY = fPlayerPositionY - fPlayerVel * fElapsedTime;
         }
         if (GetKey(olc::Key::DOWN).bHeld) {
-                fPlayerPositionY = fPlayerPositionY + fPlayerVel * fElapsedTime;
+            fPlayerPositionY = fPlayerPositionY + fPlayerVel * fElapsedTime;
         }
         if (GetKey(olc::Key::SPACE).bPressed) {
             float ftempX = fPlayerPositionX;
@@ -703,16 +764,16 @@ public:
             vBullet.emplace_back(Bullet{ftempX + float(sprPlayer-&gt;width) / 2, ftempY, false});
         }
 
-        for (auto elm: vEnemy) {
-            if (elm.alive)
-                DrawSprite(elm.x, elm.y, sprEnemy.get());
+        for (auto elm: vEnemy){
+	    if (elm.alive)
+             DrawSprite(elm.x, elm.y, sprEnemy.get());
         }
 
-        for (auto &amp;elm: vBullet) {
+        for (auto &amp;elm: vBullet){
             // only take care of bullets which are visible on the screen
-            if (elm.y &gt; -1 &amp;&amp; !elm.dead) {
-                FillCircle(int(elm.x), int(elm.y), 1, olc::RED);
-                elm.y = elm.y - fBulletVel * fElapsedTime;
+            if (elm.y &gt; -1 &amp;&amp; !elm.dead){
+               FillCircle(int(elm.x), int(elm.y), 1, olc::RED);
+               elm.y = elm.y - fBulletVel * fElapsedTime;
             }
         }
         return true;
@@ -840,11 +901,7 @@ Let us look at things in some detail,
 x coordinate to the velocity, but in fact, what we really do is,</p>
 <pre><code>X = X + Velocity * cos(theta)
 </code></pre>
-<p>Where <code>theta</code> = angle between x-axis and the direction we move in.</p>
-<h3 id="but-why-costheta"><a class="header" href="#but-why-costheta">But why cos(theta)?</a></h3>
-<p>This is because, <code>Velocity * Cos(theta)</code> is said to be horizontal
-component of the velocity which is responsible for the horizontal
-movement.</p>
+<p>Where <code>theta</code> = angle between x-axis and the direction we move in, which is 0.</p>
 <p>so, X turns out to be,</p>
 <pre><code>X = X + Velocity * cos(0)
   = X + Velocity
@@ -860,7 +917,7 @@ So in this case,</p>
 <pre><code>Y = Y + Velocity * Cos(0)
   = Y + Velocity
 </code></pre>
-<p>Now let us focus on diagonal movements now,
+<p>Now let us focus on diagonal movements,
 <img src="chapter_8/../image/diagonal-movement.png" alt="diagonal movement" /></p>
 <p>When we move diagonally, there is change in both X and Y coordinate,
 to calculate them, we will simply use the concept we used earlier,</p>
@@ -1053,6 +1110,37 @@ A enemy is killed when</p>
 <p>So just add the following line where the above condition matches in the <code>OnUserUpdate</code> function.</p>
 <pre><code class="language-cpp">life_count = life_count - 1;
 </code></pre>
+<h2 id="drawing-the-life-sprite"><a class="header" href="#drawing-the-life-sprite">Drawing the Life Sprite</a></h2>
+<p>We will use a the following sprite to represent the life count of a player</p>
+<p><img src="chapter_10/../image/life.png" alt="Life Sprite" /></p>
+<p>First we need to create a private member variable, sprLife to store a pointer to object
+of type <code>olc::Sprite</code></p>
+<pre><code class="language-cpp">std::unique_ptr&lt;olc::Sprite&gt; sprLife;
+</code></pre>
+<p>and then on <code>OnUserUpdate</code> method we assign <code>sprLife</code> as:</p>
+<pre><code class="language-cpp">bool OnUserCreate() override
+{
+  produceEnemy();
+  sprPlayer = std::make_unique&lt;olc::Sprite&gt;(&quot;/home/abhilekh/Downloads/player.png&quot;);
+  sprEnemy = std::make_unique&lt;olc::Sprite&gt;(&quot;/home/abhilekh/Downloads/enemy.png&quot;);
+  sprLife  = std::make_unique&lt;olc::Sprite&gt;(&quot;/home/abhilekh/Downloads/life.png&quot;);
+  
+  return true;
+}
+</code></pre>
+<p>To draw this sprite, we will use <code>DrawSprite</code> method, but the number of sprites to be displayed
+depends on the <code>life_count</code>, so will use a <code>for</code> loop here,</p>
+<pre><code class="language-cpp">// load life sprite..
+for (int i = 0; i &lt; life_count; ++i) {
+  DrawSprite(270 + sprLife-&gt;width + 25 * i, 5, sprLife.get());
+}
+</code></pre>
+<p>We just passed in the <code>x</code>, <code>y</code> coordinate where the sprite is to be drawn and the
+pointer to the object of type <code>olc::Sprite</code>.</p>
+<p>Now if you compile and run the program, you should see something like this
+<img src="chapter_10/../image/life-score-demo.png" alt="Score and Life Demo" /></p>
+<p>All the codes till now, can be found <a href="https://gist.github.com/Abhilekhgautam/889718740c2628d4e571fd0edf6e2799">here</a></p>
+<p>Next up we will work on polishing the game.</p>
 
                     </main>
 

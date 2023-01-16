@@ -164,11 +164,11 @@ Then let us add a vector to the private field of class, I will name it vEnemy.</
 </code></pre>
 <p>Similarly, update the <code>OnUserCreate</code> method to</p>
 <pre><code class="language-cpp">bool OnUserCreate() override
-    {
-      sprPlayer = std::make_unique&lt;olc::Sprite&gt;(&quot;/home/abhilekh/Downloads/player.png&quot;);
-      sprEnemy = std::make_unique&lt;olc::Sprite&gt;(&quot;/home/abhilekh/Downloads/enemy.png&quot;);
-      return true;
-    }
+{
+  sprPlayer = std::make_unique&lt;olc::Sprite&gt;(&quot;/home/abhilekh/Downloads/player.png&quot;);
+  sprEnemy = std::make_unique&lt;olc::Sprite&gt;(&quot;/home/abhilekh/Downloads/enemy.png&quot;);
+  return true;
+}
 </code></pre>
 <h2 id="positioning-the-enemies"><a class="header" href="#positioning-the-enemies">Positioning the Enemies</a></h2>
 <p>The <code>enemy</code> struct has two fields to represent its coordinate axis, we will simply need to assign them with some values, and draw sprites in those positions.</p>
@@ -222,24 +222,28 @@ a pointer to <code>olc::sprite</code> object.</p>
 <pre><code class="language-cpp">bool OnUserUpdate(float fElapsedTime) override
 {
   DrawSprite(fPlayerPositionX, fPlayerPositionY, sprPlayer.get());
-  if (GetKey(olc::Key::LEFT).bHeld) {
-      fPlayerPositionX = fPlayerPositionX - fPlayerVel * fElapsedTime;
+  if (GetKey(olc::Key::LEFT).bHeld)
+  {
+    fPlayerPositionX = fPlayerPositionX - fPlayerVel * fElapsedTime;
+  }
+  if (GetKey(olc::Key::RIGHT).bHeld)
+  {
+    fPlayerPositionX = fPlayerPositionX + fPlayerVel * fElapsedTime;
+  }
+  if (GetKey(olc::Key::UP).bHeld) {
+    fPlayerPositionY = fPlayerPositionY - fPlayerVel * fElapsedTime;
    }
-   if (GetKey(olc::Key::RIGHT).bHeld) {
-      fPlayerPositionX = fPlayerPositionX + fPlayerVel * fElapsedTime;
-    }
-   if (GetKey(olc::Key::UP).bHeld) {
-      fPlayerPositionY = fPlayerPositionY - fPlayerVel * fElapsedTime;
-    }
-    if (GetKey(olc::Key::DOWN).bHeld) {
-      fPlayerPositionY = fPlayerPositionY + fPlayerVel * fElapsedTime;
-    }
+  if (GetKey(olc::Key::DOWN).bHeld)
+  {
+    fPlayerPositionY = fPlayerPositionY + fPlayerVel * fElapsedTime;
+  }
 
-    for (auto elm: vEnemy) {
-       if (elm.alive)
-          DrawSprite(elm.x, elm.y, sprEnemy.get());
-    }
-  return true;
+  for (auto elm: vEnemy)
+  {
+     if (elm.alive)
+       DrawSprite(elm.x, elm.y, sprEnemy.get());
+  }
+ return true;
 }
 </code></pre>
 <p>And now if you compile and run the program you should see something like this,
