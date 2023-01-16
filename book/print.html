@@ -1,0 +1,1099 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Write your First Game in C++</title>
+        <meta name="robots" content="noindex" />
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="index.html">Write your First Game in C++</a></li><li class="chapter-item expanded affix "><a href="foreword.html">Foreword</a></li><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="chapter_1/index.html"><strong aria-hidden="true">1.</strong> Getting Started</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_1/hello_olc.html"><strong aria-hidden="true">1.1.</strong> Hello OLC</a></li><li class="chapter-item expanded "><a href="chapter_1/drawing_shape.html"><strong aria-hidden="true">1.2.</strong> Drawing Shape</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_2/index.html"><strong aria-hidden="true">2.</strong> Adding Our Player</a></li><li class="chapter-item expanded "><a href="chapter_3/index.html"><strong aria-hidden="true">3.</strong> Adding Motion to Player</a></li><li class="chapter-item expanded "><a href="chapter_4/index.html"><strong aria-hidden="true">4.</strong> Working with Time</a></li><li class="chapter-item expanded "><a href="chapter_5/index.html"><strong aria-hidden="true">5.</strong> Adding Enemies to Game</a></li><li class="chapter-item expanded "><a href="chapter_6/index.html"><strong aria-hidden="true">6.</strong> Shooting the Bullets</a></li><li class="chapter-item expanded "><a href="chapter_7/index.html"><strong aria-hidden="true">7.</strong> Collision Detection - I</a></li><li class="chapter-item expanded "><a href="chapter_8/index.html"><strong aria-hidden="true">8.</strong> Adding Life to the Enemy</a></li><li class="chapter-item expanded "><a href="chapter_9/index.html"><strong aria-hidden="true">9.</strong> Collision Detection - II</a></li><li class="chapter-item expanded "><a href="chapter_10/index.html"><strong aria-hidden="true">10.</strong> Scoreboard and the Concept of Life</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Write your First Game in C++</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="write-your-first-game-in-c"><a class="header" href="#write-your-first-game-in-c">Write your First Game in C++</a></h1>
+<p>By Abhilekh Gautam</p>
+<p>Are you tired of writing console based programs in C++ and want to use C++ for more fun, then this is for you.</p>
+<p>At the end of this book you will have a fully fledged 2D game for you.</p>
+<p>To write this game we will use OLC Pixel Game Engine and some C++ 17.</p>
+<p>For more about olc Pixel Game engine visit: <a href="https://github.com/OneLoneCoder/olcPixelGameEngine">here</a></p>
+<p>The entire source code of the game is available at : <a href="https://github.com/Abhilekhgautam/Space-Warrior">https://github.com/Abhilekhgautam/space-warrior</a></p>
+<h2 id="prequisites"><a class="header" href="#prequisites">Prequisites</a></h2>
+<p>A Simple Understanding of C++ would work. You should be aware of Inheritance in C++. We will try to use as much modern C++ as Possible. </p>
+<h2 id="setup"><a class="header" href="#setup">Setup</a></h2>
+<p>Since we will be using OLC Pixel Game Engine for this purpose we will need to set it up. This won't be covered in book as everything about that is available in its official docs.</p>
+<h3 id="for-linux"><a class="header" href="#for-linux">For Linux</a></h3>
+<p>To get things done on Linux, Visit:
+<a href="https://github.com/OneLoneCoder/olcPixelGameEngine/wiki/Compiling-on-Linux">Compiling on Linux</a></p>
+<h3 id="for-windows"><a class="header" href="#for-windows">For Windows</a></h3>
+<p>To get things done on Windows, Visit:
+<a href="https://github.com/OneLoneCoder/olcPixelGameEngine/wiki/Compiling-on-Windows-with-Other-Compilers">Compiling on Windows</a></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="foreword"><a class="header" href="#foreword">Foreword</a></h1>
+<p>Let me tell you here, I am neither a Game Developer nor a C++ Expert. I like writing C++ and I know I am pretty bad at it. If you are here to learn writing production ready code then this is not the right place for you.</p>
+<p>But I am sure this won't be a waste of time if you continue till the end after all we will be writing a 2D C++ game. That should be fun.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="introduction"><a class="header" href="#introduction">Introduction</a></h1>
+<p>Welcome to 'Write your First Game in C++'. The main objective of this book is to have some fun with C++. C++ is considered to be difficult and boring by many. The reason to find it boring is many universities (in Nepal) are teaching C++98/03 and are bounding them in writing console based programs which brings the vibe that C++ is useless among many.</p>
+<p>This book is to remind you that C++ is not boring at all. You will see why soon.</p>
+<h2 id="who-is-this-book-for"><a class="header" href="#who-is-this-book-for">Who is this book for?</a></h2>
+<p>This book is intended for everyone who wish to have fun with C++.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="getting-started"><a class="header" href="#getting-started">Getting Started</a></h1>
+<p>If you have everything setup, Lets begin your Game development journey.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="hello-olc"><a class="header" href="#hello-olc">Hello, OLC!</a></h1>
+<p>It is time to write your first program using olc::PixelGameEngine. How can we break the tradition, we will start by writing a simple Hello, World program.</p>
+<h2 id="creating-a-new-directory"><a class="header" href="#creating-a-new-directory">Creating a New Directory</a></h2>
+<p>Begin by making a directory to store your Code. I'll name it 'Space Warrior' thats the name of the game we are going to create.</p>
+<h2 id="for-linux-1"><a class="header" href="#for-linux-1">For Linux</a></h2>
+<pre><code class="language-shell">$ mkdir ~/Space-Warrior
+$ cd ~/Space-Warrior
+</code></pre>
+<h2 id="adding-the-required-header"><a class="header" href="#adding-the-required-header">Adding the required Header</a></h2>
+<p>We will then add the olcPixelEamEengine.h header in our directory which you can download <a href="https://github.com/OneLoneCoder/olcPixelGameEngine">here</a>.</p>
+<h2 id="create-a-new-cpp-file"><a class="header" href="#create-a-new-cpp-file">Create a new cpp file</a></h2>
+<p>We will now create a new cpp file I will name it main.cpp.</p>
+<pre><code class="language-shell">$ touch ~/Space-Warrior/main.cpp
+</code></pre>
+<h2 id="hello-world"><a class="header" href="#hello-world">Hello, World!</a></h2>
+<p>We begin by adding the required header</p>
+<pre><code class="language-cpp">#define OLC_PGE_APPLICATION
+#include &quot;olcPixelGameEngine.h&quot;
+</code></pre>
+<p>Now let us create a new class for our Game, <code>Game</code> it will inherit <code>olc::PixelGameEngine</code></p>
+<pre><code class="language-cpp">  class Game : public olc::PixelGameEngine
+  {
+    public:
+	Game()
+	{
+		sAppName = &quot;Space Warrior&quot;;
+	}
+
+	bool OnUserCreate() override
+	{
+		// Called once at the start, so create things here
+		return true;
+	}
+
+	bool OnUserUpdate(float fElapsedTime) override
+	{
+	  Clear(olc::BLACK);
+	  DrawString(5,5, &quot;Hello, World&quot;);	
+	  return true;
+	}
+};
+</code></pre>
+<p>Any class that inherits from <code>olc::PixeGameEngine</code> should override two functions, <code>OnUserCreate</code> and <code>OnUserUpdate</code>. Don't worry we will
+get into details later.</p>
+<p>Now lets write our main function, main function would be very neat</p>
+<pre><code class="language-cpp">int main()
+{
+	Game game;
+	if (game.Construct(256, 240, 4, 4))
+		game.Start();
+
+	return 0;
+}
+</code></pre>
+<p>That's it now if you run this program, you should see a window with string &quot;Hello, World&quot; being displayed like this:</p>
+<p><img src="chapter_1/../image/hello-olc.png" alt="Hello OLC" /></p>
+<h2 id="getting-into-details"><a class="header" href="#getting-into-details">Getting into Details</a></h2>
+<p>As mentioned earlier we inherited our class from <code>olc::PixelGameEngine</code> and then we override two functions,</p>
+<h3 id="onusercreate"><a class="header" href="#onusercreate">OnUserCreate()</a></h3>
+<p>This function is called only once by the engine at the start so we will use this function to initialize our stuff, for now we have nothing
+to initialize, so we just return <code>true</code> from the function.</p>
+<h3 id="onuserupdate"><a class="header" href="#onuserupdate">OnUserUpdate()</a></h3>
+<p>This function is called repeatedly by the engine per frame. For smooth transition of the game, we need to keep updating the frame and whenever the frame is updated this function is called. We will talk about this in more details later.</p>
+<h3 id="the-main-function"><a class="header" href="#the-main-function">The main function</a></h3>
+<p>In the main Function, we first create an object game, of type Game. We then need to tell the olc::PixelGameEngine about the size of window we want to create we do so by using the<code>Construct</code> method. The <code>Construct</code> method returns <code>true</code> if the construction was successfull and then we call the <code>start</code> method which starts our game engine.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="drawing-basic-shapes"><a class="header" href="#drawing-basic-shapes">Drawing Basic Shapes</a></h1>
+<p>Before we start writing our Game, let us see some useful functions provided by olc pixel game engine that help us in drawing shape.</p>
+<p>Note: I won't be providing full working code, just add these codes to the <code>OnUserUpdate</code> function and that would work.</p>
+<h2 id="drawing-a-line"><a class="header" href="#drawing-a-line">Drawing a Line</a></h2>
+<p>To draw a line use the <code>DrawLine</code> Method</p>
+<pre><code class="language-cpp">DrawLine(5,5, 30, 30);
+</code></pre>
+<p><code>DrawLine</code> has a signature of:</p>
+<pre><code class="language-cpp">DrawLine(int32_t x1, int32_t y1, int32_t x2, int32_t y2, Pixel p = olc::WHITE, uint32_t pattern = 0xFFFFFFFF)
+</code></pre>
+<p>It simply draws a line from (x1,y1) to (x2,y2)</p>
+<h2 id="drawing-a-circle"><a class="header" href="#drawing-a-circle">Drawing a Circle</a></h2>
+<p>To draw a circle use the <code>DrawCircle</code> Method</p>
+<pre><code class="language-cpp">DrawCircle(50, 50, 5);
+</code></pre>
+<p>DrawCircle has a signature of </p>
+<pre><code class="language-cpp">DrawCircle(int32_t x, int32_t y, int32_t radius, Pixel p = olc::WHITE, uint8_t mask = 0xFF)
+</code></pre>
+<p>It simply draws a cirle centered at (x, y) with a radius.</p>
+<h2 id="drawing-a-filled-circle"><a class="header" href="#drawing-a-filled-circle">Drawing a Filled Circle</a></h2>
+<p>As we might have guessed just call the <code>FillCircle</code> Method</p>
+<pre><code class="language-cpp">FillCircle(50, 50, 5, olc::RED);
+</code></pre>
+<p>We passed an additional parameter, the color of the pixel to fill with.</p>
+<h2 id="drawing-a-rectangle"><a class="header" href="#drawing-a-rectangle">Drawing a Rectangle</a></h2>
+<p>We use <code>DrawRect</code> method.</p>
+<pre><code class="language-cpp">DrawRect(5,5, 30, 40);
+</code></pre>
+<p>It draws a rectangle at (5,5) with a width of 30 and height of 40.</p>
+<h2 id="drawing-a-triangle"><a class="header" href="#drawing-a-triangle">Drawing a Triangle</a></h2>
+<p>We use DrawTriangle method.</p>
+<pre><code class="language-cpp">DrawTriangle(5,5,20,5, 12,10);
+</code></pre>
+<p><code>DrawTriangle</code> has following signature</p>
+<pre><code class="language-cpp">DrawTriangle(int32_t x1, int32_t y1, int32_t x2, int32_t y2, int32_t x3, int32_t y3, Pixel p = olc::WHITE)
+</code></pre>
+<p>It simply draws a triangle between three points (x1, y1), (x2, y2) and (x3, y3);</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="adding-our-player"><a class="header" href="#adding-our-player">Adding Our Player</a></h1>
+<p>Now on, we will start working on our game, let us start by adding our main player.</p>
+<p>We will use <code>olc::sprite</code> to add our player, just think <code>sprite</code> as an <code>image</code>but before this let us initialize some member variables for our class.</p>
+<pre><code class="language-cpp">class Game : public olc::PixelGameEngine
+{
+public:
+    Game()
+    {
+        sAppName = &quot;Space Warrior&quot;;
+    }
+
+    bool OnUserCreate() override
+    {
+        
+        return true;
+    }
+
+    bool OnUserUpdate(float fElapsedTime) override
+    {
+        return true;
+    }
+private:
+    float fPlayerPositionX = 185.0f;
+    float fPlayerPositionY = 250.0f;
+};
+
+</code></pre>
+<p>Nothing new, just added two variables to denote the player's X and Y coordinates in the screen.</p>
+<p>Now download the image provided below (hover and right click), for our player. You can use any image you want</p>
+<p><img src="chapter_2/../image/player.png" alt="player-image" /></p>
+<h2 id="loading-sprites"><a class="header" href="#loading-sprites">Loading Sprites</a></h2>
+<pre><code class="language-cpp">class Game : public olc::PixelGameEngine
+{
+public:
+   bool OnUserCreate() override 
+    {
+        sprPlayer = std::make_unique&lt;olc::Sprite&gt;(&quot;../sprites/player.png&quot;);
+        return true;
+    }
+
+   bool OnUserUpdate(float fElapsedTime) override
+    {
+        Clear(olc::BLACK);
+        DrawSprite(fPlayerPositionX, fPlayerPositionY, sprPlayer.get());
+        return true;
+    }
+private:
+    float fPlayerPositionX = 185.0f;
+    float fPlayerPositionY = 250.0f;
+
+    std::unique_ptr&lt;olc::Sprite&gt; sprPlayer;
+};
+</code></pre>
+<p>Don't get scared, sprPlayer is just a pointer, that is very safe to work with.
+sprPlayer holds a pointer to object of type <code>olc::Sprite</code>.</p>
+<p>We have quite a few changes here,
+We added,</p>
+<pre><code class="language-cpp">bool OnUserCreate() override
+   {
+        // sprites...
+        sprPlayer = std::make_unique&lt;olc::Sprite&gt;(&quot;../sprites/player.png&quot;);
+        return true;
+    }
+
+</code></pre>
+<p>We simply initialized <code>sprEnemy</code> by passing filepath to</p>
+<pre><code class="language-cpp">std::make_unique&lt;olc::Sprite&gt;(file_path);
+</code></pre>
+<p>Similarly, In the <code>OnUserUpdate</code> method, we added</p>
+<pre><code class="language-cpp">bool OnUserUpdate() override
+{
+  DrawSprite(fPlayerPositionX, fPlayerPositionY, sprPlayer.get());
+  return true;
+}
+</code></pre>
+<p>We used <code>DrawSprite</code> method to draw the sprite on the screen, we passed in the position of
+the player and a pointer contained by sprPlayer, remember I said earlier sprPlayer holds a
+pointer to object of type <code>olc::sprite</code>, the <code>get</code> method just return that pointer.</p>
+<p>To be on the same page, our <code>main</code> function should look like this</p>
+<pre><code class="language-cpp">int main()
+{
+    Game game;
+    if (game.Construct(450, 340, 4, 4))
+        game.Start();
+
+    return 0;
+}
+</code></pre>
+<p>Now if you run this program you should see something like this:
+<img src="chapter_2/../image/adding-player.png" alt="First look of the game" /></p>
+<p>Don't worry if you see some compiler warnings, we will deal with them later.</p>
+<p>Next we will add some life to our player, i.e. we will add some movement to the
+player.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="adding-motion-to-player"><a class="header" href="#adding-motion-to-player">Adding Motion to Player</a></h1>
+<p>Now we are going to add life to our player, we will begin by adding motions to the player. But before we start writing some code let us look at the concept behing moving (translating) the player.</p>
+<h2 id="translating-a-point"><a class="header" href="#translating-a-point">Translating a Point</a></h2>
+<p>Moving a player means we want to translate the player's position in the 2D plane.
+Consider a point in the 2D plane,<code>(x1, y1)</code>, now what will you do if you want the point to move by 5 units to the right?</p>
+<p>That's simple add 5, to the current position in the X axis, so our new postion will be <code>(x1 + 5, y1)</code>.</p>
+<p>Similarly to move the player to left we will substract 5, so our new postion will be <code>(x1 - 5, y1)</code>.</p>
+<p>Notice that we don't change the y coordinate at all because we are dealing with the horizontal motion, so y must be constant here.</p>
+<p>Similarly to move the point by 5 units upward, simply subtract 5 to the current position to obtain the new coordinate <code>(x1, y1 - 5)</code>.</p>
+<p>To move the point 5 units downward, simply add 5 to the current position to obtain the new coordinate <code>(x1, y1 + 5)</code></p>
+<p>To Summarize,</p>
+<div class="table-wrapper"><table><thead><tr><th>Current Position</th><th style="text-align: center">To Left</th><th style="text-align: right">To Right</th><th style="text-align: right">Upwards</th><th style="text-align: right">Downwards</th></tr></thead><tbody>
+<tr><td>(x1, y1)</td><td style="text-align: center">x1 - 5</td><td style="text-align: right">x1 + 5</td><td style="text-align: right">y1 - 5</td><td style="text-align: right">y1 + 5</td></tr>
+</tbody></table>
+</div>
+<p>If you are confused why we subtracted in case of upward motion, just remember the top left corner is <code>(0,0)</code>, so moving downwards requires addtion and moving upwards require subtraction.</p>
+<h2 id="handling-user-input"><a class="header" href="#handling-user-input">Handling User Input</a></h2>
+<p>We will only move the player when certain keys are pressed, so we will need to check when certain keys are pressed. That is preety easy,
+We will use the <code>GetKey</code> function and pass it in the key we are looking for,
+lets say the left arrow.</p>
+<pre><code class="language-cpp">if (GetKey(olc::Key::LEFT).bPressed)
+{
+  std::cout &lt;&lt; &quot;Left Arrow was pressed\n&quot;;
+}
+</code></pre>
+<h2 id="adding-motion"><a class="header" href="#adding-motion">Adding Motion</a></h2>
+<p>We need to move the player with some speed, so first we need to create a member
+variable representing the speed of player.</p>
+<pre><code class="language-cpp">class Game: public olc::PixelGameEngine{
+// same as before
+private:
+  //same as befor
+  float fPlayerVel = 0.5;
+};
+</code></pre>
+<p>Since we can handle user input, let us update our <code>OnUserUpdate</code> function to:</p>
+<pre><code class="language-cpp">bool OnUserUpdate(float fElapsedTime) override
+{
+  Clear(olc::BLACK);
+  DrawSprite(fPlayerPositionX, fPlayerPositionY, sprPlayer.get());
+  if (GetKey(olc::Key::LEFT).bHeld)
+  {
+     fPlayerPositionX = fPlayerPositionX - fPlayerVel;
+  }
+  if (GetKey(olc::Key::RIGHT).bHeld)
+  {
+     fPlayerPositionX = fPlayerPositionX + fPlayerVel;
+  }
+  if (GetKey(olc::Key::UP).bHeld)
+  {
+     fPlayerPositionY = fPlayerPositionY - fPlayerVel;
+  }
+  if (GetKey(olc::Key::DOWN).bHeld)
+  {
+     fPlayerPositionY = fPlayerPositionY + fPlayerVel;
+  }
+ return true;
+}
+</code></pre>
+<p>I don't think we need any explanation here, we just applied the same translation technique we learnt earlier.
+Once you compile and run the code, we should be able to move the player now.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="working-with-time"><a class="header" href="#working-with-time">Working with Time</a></h1>
+<p>Time is an important concept in games, In games we give players the illusion of movement, In fact we are displaying them the static images, to do so we keep repositioning image throughout the screen.</p>
+<p>We know that,</p>
+<p>Speed = Distance travelled / Time Taken</p>
+<p>which implies that,</p>
+<p>Distance Travelled = Speed * Time Taken</p>
+<p>So to calculate the distance travelled by any object we should know about its speed and the time that has passed.</p>
+<p>A parameter <code>fElapsedTime</code> is passed a parameter to <code>OnUserUpdate</code> function which is the previous frame duration in seconds.</p>
+<p>So to handle time properly we have to multiply the speed by fElapsedTime.
+Let us Quickly bring changes to our code,</p>
+<pre><code class="language-cpp">bool OnUserUpdate(float fElapsedTime) override
+    {
+        DrawSprite(fPlayerPositionX, fPlayerPositionY, sprPlayer.get());
+        if (GetKey(olc::Key::LEFT).bHeld) {
+                fPlayerPositionX = fPlayerPositionX - fPlayerVel * fElapsedTime;
+        }
+        if (GetKey(olc::Key::RIGHT).bHeld) {
+                fPlayerPositionX = fPlayerPositionX + fPlayerVel * fElapsedTime;
+        }
+        if (GetKey(olc::Key::UP).bHeld) {
+            fPlayerPositionY = fPlayerPositionY - fPlayerVel * fElapsedTime;
+        }
+        if (GetKey(olc::Key::DOWN).bHeld) {
+                fPlayerPositionY = fPlayerPositionY + fPlayerVel * fElapsedTime;
+        }
+        return true;
+    }
+</code></pre>
+<p>I grasp this as, if there is motion just multiply the speed by fElapsedTime and you should be fine.</p>
+<h2 id="the-player-doenot-move-now"><a class="header" href="#the-player-doenot-move-now">The Player Doenot Move Now</a></h2>
+<p>No worries, we have set <code>fPlayerVel = 0.5</code> and the value of <code>fElapsedTime</code> is even smaller, so their product would be even smaller.</p>
+<p>To solve this simply increase the player's velocity
+You just need to update the value of <code>fPlayerVel</code>.</p>
+<pre><code class="language-cpp">    float fPlayerVel = 90.0f;
+</code></pre>
+<p>A value of <code>90</code> should work fine, if that didn't worked just try some other values.</p>
+<p>Next up we will add enemies to our game. Stay Tuned.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="adding-enemies-to-game"><a class="header" href="#adding-enemies-to-game">Adding Enemies to Game</a></h1>
+<p>Let us now add enemies to our Game. I will use the image below for the enemy, you can download it by right clicking on it, or can choose any other image</p>
+<p><img src="chapter_5/../image/enemy.png" alt="Enemy" /></p>
+<p>But before we draw the sprite, let us create a <code>struct</code> that represents Enemy of our game</p>
+<pre><code class="language-cpp">struct Enemy{
+ float x;
+ float y;
+ bool  alive;
+}
+</code></pre>
+<p>Here x and y represent the x and y coordinate of the enemy and alive represents whether the enemy is alive or not.</p>
+<p>You can add this Definition right before the class Definition.</p>
+<p>We will have many enemies, so we will represent the collection of enemy using a vector.
+Then let us add a vector to the private field of class, I will name it vEnemy.</p>
+<pre><code class="language-cpp">std::vector&lt;Enemy&gt; vEnemy;
+</code></pre>
+<p>Here, <code>vEnemy</code> is a vector(collection) of Enemy.</p>
+<p>Adding enemy is similar to that of player, we will again use <code>olc::sprite</code>.</p>
+<p>Add <code>sprEnemy</code> to the private variable field too,</p>
+<pre><code class="language-cpp">std::unique_ptr&lt;olc::Sprite&gt; sprEnemy;
+</code></pre>
+<p>Similarly, update the <code>OnUserCreate</code> method to</p>
+<pre><code class="language-cpp">bool OnUserCreate() override
+    {
+      sprPlayer = std::make_unique&lt;olc::Sprite&gt;(&quot;/home/abhilekh/Downloads/player.png&quot;);
+      sprEnemy = std::make_unique&lt;olc::Sprite&gt;(&quot;/home/abhilekh/Downloads/enemy.png&quot;);
+      return true;
+    }
+</code></pre>
+<h2 id="positioning-the-enemies"><a class="header" href="#positioning-the-enemies">Positioning the Enemies</a></h2>
+<p>The <code>enemy</code> struct has two fields to represent its coordinate axis, we will simply need to assign them with some values, and draw sprites in those positions.</p>
+<p>Let us add a new method to our class, I will name it <code>produceEnemy</code>,</p>
+<pre><code class="language-cpp">void produceEnemy() {
+  for (int i = 0; i &lt; 70; ++i) {
+    if (i &lt; 18)
+       vEnemy.emplace_back(Enemy{float(ScreenWidth()) / 2 + (float) i * 10 - 100, 40.0f, true});
+    else if (i &lt; 36)
+       vEnemy.emplace_back(Enemy{float(ScreenWidth()) / 2 + 10.0f * (float) i - 280, 55.0f, true});
+    else if (i &lt; 54)
+       vEnemy.emplace_back(Enemy{float(ScreenWidth()) / 2 + 10.0f * (float) i - 460, 75.0f, true});
+    else
+       vEnemy.emplace_back(Enemy{float(ScreenWidth()) / 2 + 10.0f * (float) i - 640, 95.0f, true});
+   }
+}
+
+</code></pre>
+<p>Nothing new here, we run the loop for 70 times, meaning we will have total of 70 enemies,
+then we use <code>emplace_back</code> to add enemy to the vector.</p>
+<p>Let me workout this for you when <code>i = 0</code>,
+<code>i &lt; 0</code> so the first condition will be satisfied and the following value will be added to the vector</p>
+<pre><code class="language-cpp">Enemy{ScreenWidth() / 2 + 0 - 100, 40.0f, true}
+</code></pre>
+<p>This means when <code>i = 0</code> a new Enemy object with,</p>
+<pre><code>x = ScreenWidth() / 2 + 0 - 100
+y = 40
+alive = true
+</code></pre>
+<p>will be added to the vector. In the similar way 70 different <code>Enemy</code> object with different x and y coordinates will be added to the vector.</p>
+<p>We will need to create the enemy only once throughout the game so let us call the <code>produceEnemy</code> from the <code>OnUserCreate</code> method as:</p>
+<pre><code class="language-cpp">bool OnUserCreate() override
+{
+ produceEnemy();
+ sprPlayer = std::make_unique&lt;olc::Sprite&gt;(&quot;/home/abhilekh/Downloads/player.png&quot;);
+ sprEnemy = std::make_unique&lt;olc::Sprite&gt;(&quot;/home/abhilekh/Downloads/enemy.png&quot;);
+ return true;
+}
+</code></pre>
+<h2 id="displaying-the-sprite"><a class="header" href="#displaying-the-sprite">Displaying the Sprite</a></h2>
+<p>Displaying the Enemy is similar to displaying the player, the only difference is we have to use a loop to draw enemy because
+we have 70 enemies in total</p>
+<pre><code class="language-cpp">for (auto elm: vEnemy) {
+  if (elm.alive)
+    DrawSprite(elm.x, elm.y, sprEnemy.get());
+}
+</code></pre>
+<p>We used a <code>range based for loop</code> and called the <code>DrawSprite</code> function with the enemies position and
+a pointer to <code>olc::sprite</code> object.</p>
+<p>So our <code>OnUserUpdate</code> method should look like this,</p>
+<pre><code class="language-cpp">bool OnUserUpdate(float fElapsedTime) override
+{
+  DrawSprite(fPlayerPositionX, fPlayerPositionY, sprPlayer.get());
+  if (GetKey(olc::Key::LEFT).bHeld) {
+      fPlayerPositionX = fPlayerPositionX - fPlayerVel * fElapsedTime;
+   }
+   if (GetKey(olc::Key::RIGHT).bHeld) {
+      fPlayerPositionX = fPlayerPositionX + fPlayerVel * fElapsedTime;
+    }
+   if (GetKey(olc::Key::UP).bHeld) {
+      fPlayerPositionY = fPlayerPositionY - fPlayerVel * fElapsedTime;
+    }
+    if (GetKey(olc::Key::DOWN).bHeld) {
+      fPlayerPositionY = fPlayerPositionY + fPlayerVel * fElapsedTime;
+    }
+
+    for (auto elm: vEnemy) {
+       if (elm.alive)
+          DrawSprite(elm.x, elm.y, sprEnemy.get());
+    }
+  return true;
+}
+</code></pre>
+<p>And now if you compile and run the program you should see something like this,
+<img src="chapter_5/../image/adding-enemy.png" alt="Status After Adding an Enemy" /></p>
+<p>Next up we will implementing bullet shooting for our player.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="shooting-the-bullets"><a class="header" href="#shooting-the-bullets">Shooting the Bullets</a></h1>
+<p>We have a player and enemies, whats next? Lets shoot them.</p>
+<p>We will need multiple bullets which we will store as a vector,
+and we will also create a struct <code>Bullet</code> to represent the bullets
+in our game</p>
+<pre><code class="language-cpp">struct Bullet{
+  float x;
+  float y;
+  bool dead;
+};
+
+</code></pre>
+<p>Here x and y represents the position of the bullet and dead represents the 
+current status of the bullet.</p>
+<p>Let us then create another variable in our private field to represent the 
+collection of Bullets. I'll name it <code>vBullet</code>, you can name it anything
+you want.</p>
+<pre><code class="language-cpp">private:
+  //Same as before
+  std::vector&lt;Bullet&gt; vBullet;
+  // Same as before
+</code></pre>
+<p>We should first decide the key that should be pressed so the player 
+will shoot.</p>
+<p>I choose the <code>space</code> key, you can choose any key of your choice.
+Let us update the <code>OnUserUpdate</code> method so that it listens to the
+pressing of the space key.</p>
+<pre><code class="language-cpp">if (GetKey(olc::Key::SPACE).bPressed)
+{
+  float ftempX = fPlayerPositionX;
+  float ftempY = fPlayerPositionY;
+  vBullet.emplace_back(Bullet{ftempX + float(sprPlayer-&gt;width) / 2, ftempY, false});
+}
+</code></pre>
+<p>The main concern for the <code>Bullets</code> should be their shooting position, I set it to be
+from the center of the player.</p>
+<p>Whenever <code>space</code> key is pressed we add a new Bullet to the vector with values set to</p>
+<pre><code>x = fPlayerPostionX + sprPlayer-&gt;width / 2
+y = fPlayerPositionY
+dead = false
+</code></pre>
+<p>here <code>fPlayerPositionX</code> is the top left corner of the player's sprite, to move to the
+center of image we should add up half the width of the image to its top left position.</p>
+<h2 id="drawing-the-bullets"><a class="header" href="#drawing-the-bullets">Drawing the bullets</a></h2>
+<p>We will simply use a circle with the radius set to 1, as a bullet.
+Similar to drawing enemies, we will use loop here, as we have a collection
+of bullets.</p>
+<pre><code class="language-cpp">for (auto &amp;elm: vBullet) {
+  if (elm.y &gt; -1 &amp;&amp; !elm.dead) {
+    FillCircle(elm.x, elm.y, 1, olc::RED);
+  }
+}
+</code></pre>
+<h2 id="moving-the-bullets"><a class="header" href="#moving-the-bullets">Moving the Bullets</a></h2>
+<p>We need to move the bullets with some speed, so let us declare yet another private member
+variable that represents the bullet velocity, I will name it fBulletVel, and set it as </p>
+<pre><code class="language-cpp">float fBulletVel = 180.0f;
+</code></pre>
+<p>Moving the bullet means translating its position, since bullets will be fired upward we will be 
+subtracting the y coordinate of the bullet with its speed, i.e.</p>
+<pre><code class="language-cpp">for (auto &amp;elm: vBullet) {
+  // only take care of bullets which are visible on the screen
+   if (elm.y &gt; -1 &amp;&amp; !elm.dead) {
+     FillCircle(int(elm.x), int(elm.y), 1, olc::RED);
+     elm.y = elm.y - fBulletVel * fElapsedTime;
+ }
+}
+</code></pre>
+<p>We don't need to draw bullets that are gone away from the screen display area, so used the if condition to ensure it.
+Remember that, we just multiply <code>fElapsedTime</code> with the velocity of the moving object.</p>
+<p>As of now, your code should look like this</p>
+<pre><code class="language-cpp">#define OLC_PGE_APPLICATION
+#include &quot;olcPixelGameEngine.h&quot;
+
+struct Enemy{
+    float x;
+    float y;
+    bool alive;
+};
+
+struct Bullet{
+  float x;
+  float y;
+  bool dead;
+};
+
+class Game : public olc::PixelGameEngine
+{
+public:
+    Game(){
+        sAppName = &quot;Space Warrior&quot;;
+    }
+
+    void produceEnemy() {
+        for (int i = 0; i &lt; 70; ++i) {
+            if (i &lt; 18)
+                vEnemy.emplace_back(Enemy{float(ScreenWidth()) / 2 + (float) i * 10 - 100, 40.0f, true});
+            else if (i &lt; 36)
+                vEnemy.emplace_back(Enemy{float(ScreenWidth()) / 2 + 10.0f * (float) i - 280, 55.0f, true});
+            else if (i &lt; 54)
+                vEnemy.emplace_back(Enemy{float(ScreenWidth()) / 2 + 10.0f * (float) i - 460, 75.0f, true});
+            else
+                vEnemy.emplace_back(Enemy{float(ScreenWidth()) / 2 + 10.0f * (float) i - 640, 95.0f, true});
+        }
+    }
+
+
+    bool OnUserCreate() override
+    {
+        produceEnemy();
+        sprPlayer = std::make_unique&lt;olc::Sprite&gt;(&quot;/home/abhilekh/Downloads/player.png&quot;);
+        sprEnemy = std::make_unique&lt;olc::Sprite&gt;(&quot;/home/abhilekh/Downloads/enemy.png&quot;);
+        return true;
+    }
+
+    bool OnUserUpdate(float fElapsedTime) override
+    {
+        Clear(olc::BLACK);
+        DrawSprite(fPlayerPositionX, fPlayerPositionY, sprPlayer.get());
+        if (GetKey(olc::Key::LEFT).bHeld) {
+                fPlayerPositionX = fPlayerPositionX - fPlayerVel * fElapsedTime;
+        }
+        if (GetKey(olc::Key::RIGHT).bHeld) {
+                fPlayerPositionX = fPlayerPositionX + fPlayerVel * fElapsedTime;
+        }
+        if (GetKey(olc::Key::UP).bHeld) {
+            fPlayerPositionY = fPlayerPositionY - fPlayerVel * fElapsedTime;
+        }
+        if (GetKey(olc::Key::DOWN).bHeld) {
+                fPlayerPositionY = fPlayerPositionY + fPlayerVel * fElapsedTime;
+        }
+        if (GetKey(olc::Key::SPACE).bPressed) {
+            float ftempX = fPlayerPositionX;
+            float ftempY = fPlayerPositionY;
+            vBullet.emplace_back(Bullet{ftempX + float(sprPlayer-&gt;width) / 2, ftempY, false});
+        }
+
+        for (auto elm: vEnemy) {
+            if (elm.alive)
+                DrawSprite(elm.x, elm.y, sprEnemy.get());
+        }
+
+        for (auto &amp;elm: vBullet) {
+            // only take care of bullets which are visible on the screen
+            if (elm.y &gt; -1 &amp;&amp; !elm.dead) {
+                FillCircle(int(elm.x), int(elm.y), 1, olc::RED);
+                elm.y = elm.y - fBulletVel * fElapsedTime;
+            }
+        }
+        return true;
+    }
+private:
+    float fPlayerPositionX = 185.0f;
+    float fPlayerPositionY = 250.0f;
+    float fPlayerVel = 90.0f;
+    float fBulletVel = 180.0f;
+
+    std::unique_ptr&lt;olc::Sprite&gt; sprPlayer;
+    std::unique_ptr&lt;olc::Sprite&gt; sprEnemy;
+
+    std::vector&lt;Enemy&gt; vEnemy;
+    std::vector&lt;Bullet&gt; vBullet;
+
+};
+int main()
+{
+    Game game;
+    if (game.Construct(450, 340, 4, 4))
+        game.Start();
+
+    return 0;
+}
+</code></pre>
+<p>If that's the case, you should now see bullets being shot. But that bullet doesn't
+kill any enemy.</p>
+<p>Next up we will implement collision detection for the Bullet and the enemy. Until then Have Fun!</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="collision-detection---i"><a class="header" href="#collision-detection---i">Collision Detection - I</a></h1>
+<p>So far so good, we have a player that can move and shoot bullets. We also have enemy that pose threats to the player, the player needs to kill the enemy with the help of the bullets. So will be implementing this.</p>
+<p>To kill the enemy we need to find out whether the bullet collided with the enemy or not.
+This is gonna be one of the tricky part of the entire program, But no problem I will try to explain everything.</p>
+<h2 id="detecting-the-collision"><a class="header" href="#detecting-the-collision">Detecting the collision</a></h2>
+<p>It might sound simple but when the coordinate of both bullets and the enemy are same they will collide. That's right but not totally, this is because our enemy has width and touching any part of that enemy should be considered as a collision.</p>
+<p>Let us first look at the image below:
+<img src="chapter_7/../image/sprite-demo.png" alt="sprite-demo" /></p>
+<p>Colliding with such enemy means, the x coordinate of the bullet can have the value in the range from, enemy's <code>x</code> to <code>x + sprEnemy-&gt;width</code>.</p>
+<p>But the bullet can be thought of a circle bounded inside a rectangle, in such way our bullet will also have a width and height.</p>
+<p><img src="chapter_7/../image/circle-demo.png" alt="circle-demo" /></p>
+<p>So For collision, </p>
+<ul>
+<li><code>Bullet.y -  1 &gt;= Enemy.y + sprEnemy-&gt;height</code>, this means that the top most point of our bullet is in the same level or above <code>y + sprEnemy-&gt;height</code>
+But this is not the only case, as:</li>
+</ul>
+<p><img src="chapter_7/../image/no-collision-for-same-y.png" alt="no-collision-for-same-y" /></p>
+<p>The above image matches the above condition, but this is not the condition for collision, we have to check for the <code>x</code> coordinate as well.</p>
+<ul>
+<li><code>Bullet.x + 1 &gt;= Enemy.x</code>, this means that the extreme right point of the bullet must be greater than Enemy's <code>x</code> coordinate.
+But this is also not the only case, as:</li>
+</ul>
+<p><img src="chapter_7/../image/no-collision-for-greater-x.png" alt="no-collsion-for-greater-x" /></p>
+<p>For the collision to take place (in X), we have to bound the extreme points of the bullet within <code>Enemy.x</code> to <code>Enemy.x + sprEnemy-&gt;width</code></p>
+<p>To do so, we should set the condition for left extreme point as well</p>
+<ul>
+<li><code>Bullet.x - 1 &lt;= Enemy.x + sprEnemy-&gt;width</code>. But this is not the only condtion.</li>
+</ul>
+<p><img src="chapter_7/../image/no-collision-for-smaller-x.png" alt="no-collision-for-smaller-x" /></p>
+<p>If we combine all these three condition, we will be able to detect the collision.</p>
+<p>Combining all these three conditions we get</p>
+<ul>
+<li><code>Bullet.y - 1 &gt;= Enemy.y + sprEnemy-&gt;height</code></li>
+<li><code>Bullet.x + 1 &gt;= Enemy.x</code></li>
+<li><code>Bullet.x - 1 &lt;= Enemy.x + sprEnemy-&gt;width</code></li>
+</ul>
+<h2 id="implementing-the-collision"><a class="header" href="#implementing-the-collision">Implementing the Collision</a></h2>
+<p>Too much talk, now lets see some code in action, add the following line to the
+<code>OnUserUpdate</code> method</p>
+<pre><code class="language-cpp">for (auto &amp;elm: vBullet) {
+  for (auto &amp;enemy: vEnemy) {
+     if (!elm.dead &amp;&amp; enemy.alive &amp;&amp; elm.y &gt; enemy.y &amp;&amp; elm.x + 1 &gt;= enemy.x &amp;&amp;
+         elm.x - 1 &lt;= enemy.x + float(sprEnemy-&gt;width) &amp;&amp;
+         elm.y - 1 &lt;= enemy.y + float(sprEnemy-&gt;height)) {
+            // kill both bullet and enemy.
+            elm.dead = true;
+            enemy.alive = false;
+        }
+     }
+}
+</code></pre>
+<p>We used a nested loop because we have to check the collision for each element against each enemy.</p>
+<p>Now you should see the player killing the enemy, but enemies are very weak for us now.</p>
+<p>Next up we will give life to our enemy.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="adding-life-to-the-enemy"><a class="header" href="#adding-life-to-the-enemy">Adding Life to the Enemy</a></h1>
+<p>Our enemy do nothing as we now, I want the enemies to move towards our player, and when it collides with our player, the life count of the player reduces.</p>
+<h2 id="the-pythagoras-theorem"><a class="header" href="#the-pythagoras-theorem">The Pythagoras Theorem</a></h2>
+<p>Since the enemy will be moving towards the player, we need to determine the path (or angle) at which enemy move. This is where the Pythagoras theorem comes in.</p>
+<p><img src="chapter_8/../image/pythagoras-theorem.png" alt="The Pythagoras Theorem" /></p>
+<p><code>tempY</code> is the vertical distance between the enemy and the player while <code>tempX</code> is the horizontal distance between the enemy and player.</p>
+<p>To calculate the hypo (hypotenuse), we can use pythagoras theorem as,</p>
+<pre><code>hypo = sqrt(tempY^2 + tempX^2)
+</code></pre>
+<p><code>tempX</code> and <code>tempY</code> can be calculated as:</p>
+<pre><code class="language-cpp">tempX = x1 - (x + sprEnemey-&gt;width / 2);
+
+tempY = y1 - (y + sprEnemy-&gt;height);
+</code></pre>
+<p>Note that the coordinates here are based on the above image.</p>
+<p>So we can now calculate the value of <code>sin(theta)</code> and <code>cos(theta)</code>.
+From basic mathematics we have,</p>
+<pre><code>sin(theta) = height_of_perpendicular / hypotenuse
+</code></pre>
+<p>which in our case turns out to be,</p>
+<pre><code>sin(theta) = tempY / hypo
+</code></pre>
+<p>Similarly,</p>
+<pre><code>cos(theta) = base / hypotenuse
+</code></pre>
+<p>which in our case turns out to be,</p>
+<pre><code>cos(theta) = tempX / hypotenuse
+</code></pre>
+<h2 id="what-to-do-with-the-angles"><a class="header" href="#what-to-do-with-the-angles">What to do with the angles?</a></h2>
+<p>Remember that, when we moved to some X direction, we simply added the
+speed to the <code>x</code> coordinate and when we moved to some Y direction, we
+added the speed to the 'y' coordinate in case of the player.</p>
+<p>But things slightly change here, since we are following the player, we have
+to choose the shortest path. i.e. We won't only move in 
+single direction(either X or either Y), we have to move diagonally
+which means we have to travel some X and some Y distance at the same
+time.
+In fact we will travel with certain angle along the X and Y direction.
+Let us look at things in some detail,
+<img src="chapter_8/../image/horizontal-component.png" alt="Horizontal Movement" /></p>
+<p>When we are moving horizontally, it looks like we are just adding the
+x coordinate to the velocity, but in fact, what we really do is,</p>
+<pre><code>X = X + Velocity * cos(theta)
+</code></pre>
+<p>Where <code>theta</code> = angle between x-axis and the direction we move in.</p>
+<h3 id="but-why-costheta"><a class="header" href="#but-why-costheta">But why cos(theta)?</a></h3>
+<p>This is because, <code>Velocity * Cos(theta)</code> is said to be horizontal
+component of the velocity which is responsible for the horizontal
+movement.</p>
+<p>so, X turns out to be,</p>
+<pre><code>X = X + Velocity * cos(0)
+  = X + Velocity
+</code></pre>
+<p>Similarly for the vertical movement,
+<img src="chapter_8/../image/vertical-component.png" alt="Vertical Movement" /></p>
+<p>When we are moving vertically downwards, X coordinate remains constant and
+Y can be calculated as:</p>
+<pre><code>Y = Y + Velocity * Cos(theta)
+</code></pre>
+<p>where <code>theta</code> is the angle between Y-axis and the resultant.
+So in this case,</p>
+<pre><code>Y = Y + Velocity * Cos(0)
+  = Y + Velocity
+</code></pre>
+<p>Now let us focus on diagonal movements now,
+<img src="chapter_8/../image/diagonal-movement.png" alt="diagonal movement" /></p>
+<p>When we move diagonally, there is change in both X and Y coordinate,
+to calculate them, we will simply use the concept we used earlier,</p>
+<pre><code>X = X + Velocity * Cos(theta)
+Y = Y + Velocity * Cos(90 - theta)
+  = Y + Velocity * Sin(theta)
+</code></pre>
+<p>Note that, When we move diagonally, the angle between Y-axis and the resultant
+is <code>(90 - theta)</code>, and <code>Cos(90 - theta) = Sin(theta)</code>, so we multiply by <code>Sin(theta)</code> in case of Y.</p>
+<h2 id="implementation"><a class="header" href="#implementation">Implementation</a></h2>
+<p>Too much talk till now, let us write some code then,
+Update the <code>OnUserUpdate</code> method to have following snippets:</p>
+<pre><code class="language-cpp">for(auto &amp;elm : vEnemy){
+  if(elm.alive)
+  {
+    float tempX = (fPlayerPositionX + sprPlayer-&gt;width / 2
+        ) - elm.x + sprEnemy-&gt;height + sprEnemy-&gt;width / 2
+                               );
+    float tempY = (fPlayerPositionY - elm.y + sprEnemy-&gt;height);
+
+    // simple pythagoras theorem
+    float tempHypo = powf(tempX, 2) + powf(tempY, 2);
+    float Hypo = sqrtf(tempHypo);
+
+    float sinTheta = (tempY / Hypo);
+    float cosTheta = (tempX / Hypo);
+
+    elm.x = elm.x + fEnemyVel * cosTheta * fElapsedTime;
+    elm.y = elm.y + fEnemyVel * sinTheta * fElapsedTime;
+    break;
+  }
+}
+</code></pre>
+<p>We iterated through every enemy in the Enemy vector and then
+we calculated the values of <code>tempX</code> and <code>tempY</code>using the techniques we discussed earlier,
+and then calculated the <code>hypotenuse</code> and values of <code>sin(theta)</code> and cos(theta).</p>
+<p>And then simply calculated the new coordinates.</p>
+<pre><code class="language-cpp">elm.x = elm.x + fEnemyVel * cosTheta * fElapsedTime;
+elm.y = elm.y + fEnemyVel * sinTheta * fElapsedTime;
+</code></pre>
+<p>Note the inclusion of <code>fElapsedTime</code>, anything in a motion
+should have its velocity multiplied by fElapsedTime.</p>
+<p>There is a <code>break</code> statement at the end of the end block,
+this is because we only want to move our enemy one at a time.</p>
+<p>When you run this program, you should see one of the enemy following the player:
+<img src="chapter_8/../image/enemy-follows-player.png" alt="enemy following the player" /></p>
+<p>But we will need to kill the enemy when the collsion takes place, that is set for
+the next chapter.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="collision-detection---ii"><a class="header" href="#collision-detection---ii">Collision Detection - II</a></h1>
+<p>Earlier we talked about Collision Detection, where we detected the collsion 
+between bullet and the enemy. This time we have to detect collision between
+the enemy and player.</p>
+<p>The concepts and techniques are similar as before,
+<img src="chapter_9/../image/collision-enemy-player.png" alt="Collision between Enemy and Player" /></p>
+<p>I won't be explaining too much, If you are still confused head back to chapter-7, where I explained in detail about the collision detection.</p>
+<h2 id="the-conditions"><a class="header" href="#the-conditions">The conditions</a></h2>
+<ul>
+<li><code>x + sprEnemy-&gt;width &gt;= x1</code></li>
+<li><code>x &lt;= x1 + sprPlayer-&gt;width</code></li>
+<li><code>y + sprEnemy-&gt;height &gt;= y1</code></li>
+</ul>
+<p>We check for the range of corners of the enemy, if they satisfy all of the above
+condition, we can say that they have collided.</p>
+<h2 id="implementation-1"><a class="header" href="#implementation-1">Implementation</a></h2>
+<p>Update the <code>OnUserUpdate</code> method to contain following snippets,</p>
+<pre><code class="language-cpp">for(auto &amp;elm : vEnemy){
+  if(elm.alive)
+  {
+   // Same as before..
+     if (elm.x + sprEnemy-&gt;width &gt;= fPlayerPositionX &amp;&amp;
+         elm.x &lt;= fPlayerPositionX + sprPlayer-&gt;width &amp;&amp;
+         elm.y + sprEnemy-&gt;height &gt;= fPlayerPositionY)
+        {
+          elm.alive = false;
+        }
+      break;
+  }
+}
+</code></pre>
+<p>Above code justifies everything we talked earlier, nothing to explain here.
+We set <code>elm.alive = false</code> to kill the enemy. So now you should see
+enemies being killed on collion with the player.</p>
+<p>Till now your <code>OnUserUpdate</code> method should look like this:</p>
+<pre><code class="language-cpp">bool OnUserUpdate(float fElapsedTime) override
+{
+  Clear(olc::BLACK);
+  DrawSprite(fPlayerPositionX, fPlayerPositionY, sprPlayer.get());
+  if (GetKey(olc::Key::LEFT).bHeld) {
+    fPlayerPositionX = fPlayerPositionX - fPlayerVel * fElapsedTime;
+   }
+   if (GetKey(olc::Key::RIGHT).bHeld) {
+    fPlayerPositionX = fPlayerPositionX + fPlayerVel * fElapsedTime;
+    }
+   if (GetKey(olc::Key::UP).bHeld) {
+    fPlayerPositionY = fPlayerPositionY - fPlayerVel * fElapsedTime;
+   }
+        if (GetKey(olc::Key::DOWN).bHeld) {
+                fPlayerPositionY = fPlayerPositionY + fPlayerVel * fElapsedTime;
+        }
+        if (GetKey(olc::Key::SPACE).bPressed) {
+            float ftempX = fPlayerPositionX;
+            float ftempY = fPlayerPositionY;
+            vBullet.emplace_back(Bullet{ftempX + float(sprPlayer-&gt;width) / 2, ftempY, false});
+        }
+
+        for (auto elm: vEnemy) {
+            if (elm.alive)
+                DrawSprite(elm.x, elm.y, sprEnemy.get());
+        }
+
+        for (auto &amp;elm: vBullet) {
+            // only take care of bullets which are visible on the screen
+            if (elm.y &gt; -1 &amp;&amp; !elm.dead) {
+                FillCircle(int(elm.x), int(elm.y), 1, olc::RED);
+                elm.y = elm.y - fBulletVel * fElapsedTime;
+            }
+        }
+
+   for (auto &amp;elm: vBullet) {
+     for (auto &amp;enemy: vEnemy) {
+        if (!elm.dead &amp;&amp; enemy.alive &amp;&amp; elm.y &gt; enemy.y &amp;&amp; elm.x + 1 &gt;= enemy.x &amp;&amp;
+            elm.x - 1 &lt;= enemy.x + float(sprEnemy-&gt;width) &amp;&amp;
+            elm.y - 1 &lt;= enemy.y + float(sprEnemy-&gt;height)) {
+            // kill both bullet and enemy.
+            elm.dead = true;
+            enemy.alive = false;
+         }
+       }
+     }
+
+   for(auto &amp;elm : vEnemy){
+    if(elm.alive){
+        float tempX = ((fPlayerPositionX + float(sprPlayer-&gt;width) / 2
+         ) - elm.x + float(sprEnemy-&gt;height) + float(sprEnemy-&gt;width) / 2
+                               );
+        float tempY = (fPlayerPositionY - elm.y + float(sprEnemy-&gt;height));
+
+        // simple pythagoras theorem
+        float tempHypo = powf(tempX, 2) + powf(tempY, 2);
+        float Hypo = sqrtf(tempHypo);
+
+        float sinTheta = (tempY / Hypo);
+        float cosTheta = (tempX / Hypo);
+
+        elm.x = elm.x + fEnemyVel * cosTheta * fElapsedTime;
+        elm.y = elm.y + fEnemyVel * sinTheta * fElapsedTime;
+
+        if (elm.x + sprEnemy-&gt;width &gt;= fPlayerPositionX &amp;&amp;
+            elm.x &lt;= fPlayerPositionX + sprPlayer-&gt;width &amp;&amp;
+            elm.y + sprEnemy-&gt;height &gt;= fPlayerPositionY)
+        {
+          elm.alive = false;
+        }
+          break;
+     }
+   }
+
+return true;
+}
+</code></pre>
+<p>Next up we will add Scoreboard and implement the concept of life
+for out Player.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="scoreboard-and-the-concept-of-life"><a class="header" href="#scoreboard-and-the-concept-of-life">Scoreboard and the Concept of Life</a></h1>
+<p>We are nearly at the end of the book now, we can move the player, shoot the threatful enemies, Let us now work out
+for the Scoreboard and implement the concept of life.</p>
+<p>The Rule of the game is simple, you kill a enemy you get 5 points, you collide with the enemy your life reduces by 1,
+since collision kills the enemy, you will also gain those points.</p>
+<p>To store the score and life count, add two new variables to the private member field of the class,</p>
+<pre><code class="language-cpp">private:
+  int score = 0;
+  int life_count = 3;
+</code></pre>
+<h2 id="displaying-the-score"><a class="header" href="#displaying-the-score">Displaying the Score:</a></h2>
+<p>We will use the <code>DrawString</code> function to display the score, Update <code>OnUserUpdate</code> function to,</p>
+<pre><code class="language-cpp">DrawString(0, 5, &quot;SCORE:&quot; + std::to_string(score));
+</code></pre>
+<p>We also need to update the score, when the enemy is killed,
+A enemy is killed when</p>
+<ul>
+<li>The bullet strikes the enemy</li>
+<li>The enemy collides with the player.</li>
+</ul>
+<p>We now just need to add the following line where the above conditions are satisfied.</p>
+<pre><code class="language-cpp">score = score + 5;
+</code></pre>
+<p>We also need to reduce the <code>life_count</code> by 1 when</p>
+<ul>
+<li>The enemy collides with the player</li>
+</ul>
+<p>So just add the following line where the above condition matches in the <code>OnUserUpdate</code> function.</p>
+<pre><code class="language-cpp">life_count = life_count - 1;
+</code></pre>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+        <script>
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
+        </script>
+
+    </body>
+</html>
