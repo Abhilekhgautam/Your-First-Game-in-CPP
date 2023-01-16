@@ -35,7 +35,7 @@ So just add the following line where the above condition matches in the `OnUserU
 life_count = life_count - 1;
 ```
 ## Drawing the Life Sprite
-We will use a the following sprite to represent the life count of a player
+We will use the sprite below to represent the life count of a player
 
 ![Life Sprite](../image/life.png)
 

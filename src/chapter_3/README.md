@@ -1,5 +1,5 @@
 # Adding Motion to Player
-Now we are going to add life to our player, we will begin by adding motions to the player. But before we start writing some code let us look at the concept behing moving (translating) the player.
+Now we are going to add life to our player, we will begin by adding motions to the player. But before we start writing some code let us look at the concept behind moving (translating) the player.
 
 ## Translating a Point
  

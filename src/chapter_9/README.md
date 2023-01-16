@@ -35,7 +35,7 @@ for(auto &elm : vEnemy){
 ```
 Above code justifies everything we talked earlier, nothing to explain here.
 We set `elm.alive = false` to kill the enemy. So now you should see
-enemies being killed on collion with the player.
+enemies being killed on collision with the player.
 
 Till now your `OnUserUpdate` method should look like this:
 ```cpp
