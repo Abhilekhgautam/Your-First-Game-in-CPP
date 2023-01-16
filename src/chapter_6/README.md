@@ -62,8 +62,10 @@ Similar to drawing enemies, we will use loop here, as we have a collection
 of bullets.
 
 ```cpp
-for (auto &elm: vBullet) {
-  if (elm.y > -1 && !elm.dead) {
+for (auto &elm: vBullet)
+{
+  if (elm.y > -1 && !elm.dead) 
+  {
     FillCircle(elm.x, elm.y, 1, olc::RED);
   }
 }
@@ -81,12 +83,14 @@ Moving the bullet means translating its position, since bullets will be fired up
 subtracting the y coordinate of the bullet with its speed, i.e.
 
 ```cpp
-for (auto &elm: vBullet) {
+for (auto &elm: vBullet)
+{
   // only take care of bullets which are visible on the screen
-   if (elm.y > -1 && !elm.dead) {
+   if (elm.y > -1 && !elm.dead) 
+   {
      FillCircle(int(elm.x), int(elm.y), 1, olc::RED);
      elm.y = elm.y - fBulletVel * fElapsedTime;
- }
+   }
 }
 ```
 
@@ -99,9 +103,9 @@ As of now, your code should look like this
 #include "olcPixelGameEngine.h"
 
 struct Enemy{
-    float x;
-    float y;
-    bool alive;
+  float x;
+  float y;
+  bool alive;
 };
 
 struct Bullet{
@@ -113,21 +117,24 @@ struct Bullet{
 class Game : public olc::PixelGameEngine
 {
 public:
-    Game(){
+    Game()
+    {
         sAppName = "Space Warrior";
     }
 
-    void produceEnemy() {
-        for (int i = 0; i < 70; ++i) {
-            if (i < 18)
-                vEnemy.emplace_back(Enemy{float(ScreenWidth()) / 2 + (float) i * 10 - 100, 40.0f, true});
-            else if (i < 36)
-                vEnemy.emplace_back(Enemy{float(ScreenWidth()) / 2 + 10.0f * (float) i - 280, 55.0f, true});
-            else if (i < 54)
-                vEnemy.emplace_back(Enemy{float(ScreenWidth()) / 2 + 10.0f * (float) i - 460, 75.0f, true});
-            else
-                vEnemy.emplace_back(Enemy{float(ScreenWidth()) / 2 + 10.0f * (float) i - 640, 95.0f, true});
-        }
+    void produceEnemy() 
+    {
+      for (int i = 0; i < 70; ++i)
+      {
+         if (i < 18)
+           vEnemy.emplace_back(Enemy{float(ScreenWidth()) / 2 + (float) i * 10 - 100, 40.0f, true});
+         else if (i < 36)
+           vEnemy.emplace_back(Enemy{float(ScreenWidth()) / 2 + 10.0f * (float) i - 280, 55.0f, true});
+         else if (i < 54)
+           vEnemy.emplace_back(Enemy{float(ScreenWidth()) / 2 + 10.0f * (float) i - 460, 75.0f, true});
+         else
+           vEnemy.emplace_back(Enemy{float(ScreenWidth()) / 2 + 10.0f * (float) i - 640, 95.0f, true});
+      }
     }
 
 
@@ -144,16 +151,16 @@ public:
         Clear(olc::BLACK);
         DrawSprite(fPlayerPositionX, fPlayerPositionY, sprPlayer.get());
         if (GetKey(olc::Key::LEFT).bHeld) {
-                fPlayerPositionX = fPlayerPositionX - fPlayerVel * fElapsedTime;
+            fPlayerPositionX = fPlayerPositionX - fPlayerVel * fElapsedTime;
         }
         if (GetKey(olc::Key::RIGHT).bHeld) {
-                fPlayerPositionX = fPlayerPositionX + fPlayerVel * fElapsedTime;
+            fPlayerPositionX = fPlayerPositionX + fPlayerVel * fElapsedTime;
         }
         if (GetKey(olc::Key::UP).bHeld) {
             fPlayerPositionY = fPlayerPositionY - fPlayerVel * fElapsedTime;
         }
         if (GetKey(olc::Key::DOWN).bHeld) {
-                fPlayerPositionY = fPlayerPositionY + fPlayerVel * fElapsedTime;
+            fPlayerPositionY = fPlayerPositionY + fPlayerVel * fElapsedTime;
         }
         if (GetKey(olc::Key::SPACE).bPressed) {
             float ftempX = fPlayerPositionX;
@@ -161,16 +168,16 @@ public:
             vBullet.emplace_back(Bullet{ftempX + float(sprPlayer->width) / 2, ftempY, false});
         }
 
-        for (auto elm: vEnemy) {
-            if (elm.alive)
-                DrawSprite(elm.x, elm.y, sprEnemy.get());
+        for (auto elm: vEnemy){
+	    if (elm.alive)
+             DrawSprite(elm.x, elm.y, sprEnemy.get());
         }
 
-        for (auto &elm: vBullet) {
+        for (auto &elm: vBullet){
             // only take care of bullets which are visible on the screen
-            if (elm.y > -1 && !elm.dead) {
-                FillCircle(int(elm.x), int(elm.y), 1, olc::RED);
-                elm.y = elm.y - fBulletVel * fElapsedTime;
+            if (elm.y > -1 && !elm.dead){
+               FillCircle(int(elm.x), int(elm.y), 1, olc::RED);
+               elm.y = elm.y - fBulletVel * fElapsedTime;
             }
         }
         return true;

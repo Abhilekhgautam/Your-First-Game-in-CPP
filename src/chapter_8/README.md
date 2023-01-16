@@ -82,7 +82,7 @@ So in this case,
 Y = Y + Velocity * Cos(0)
   = Y + Velocity
 ```
-Now let us focus on diagonal movements now,
+Now let us focus on diagonal movements,
 ![diagonal movement](../image/diagonal-movement.png)
 
 When we move diagonally, there is change in both X and Y coordinate,

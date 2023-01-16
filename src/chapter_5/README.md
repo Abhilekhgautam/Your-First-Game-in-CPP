@@ -36,11 +36,11 @@ std::unique_ptr<olc::Sprite> sprEnemy;
 Similarly, update the `OnUserCreate` method to
 ```cpp
 bool OnUserCreate() override
-    {
-      sprPlayer = std::make_unique<olc::Sprite>("/home/abhilekh/Downloads/player.png");
-      sprEnemy = std::make_unique<olc::Sprite>("/home/abhilekh/Downloads/enemy.png");
-      return true;
-    }
+{
+  sprPlayer = std::make_unique<olc::Sprite>("/home/abhilekh/Downloads/player.png");
+  sprEnemy = std::make_unique<olc::Sprite>("/home/abhilekh/Downloads/enemy.png");
+  return true;
+}
 ```
 
 ## Positioning the Enemies
@@ -110,24 +110,28 @@ So our `OnUserUpdate` method should look like this,
 bool OnUserUpdate(float fElapsedTime) override
 {
   DrawSprite(fPlayerPositionX, fPlayerPositionY, sprPlayer.get());
-  if (GetKey(olc::Key::LEFT).bHeld) {
-      fPlayerPositionX = fPlayerPositionX - fPlayerVel * fElapsedTime;
+  if (GetKey(olc::Key::LEFT).bHeld)
+  {
+    fPlayerPositionX = fPlayerPositionX - fPlayerVel * fElapsedTime;
+  }
+  if (GetKey(olc::Key::RIGHT).bHeld)
+  {
+    fPlayerPositionX = fPlayerPositionX + fPlayerVel * fElapsedTime;
+  }
+  if (GetKey(olc::Key::UP).bHeld) {
+    fPlayerPositionY = fPlayerPositionY - fPlayerVel * fElapsedTime;
    }
-   if (GetKey(olc::Key::RIGHT).bHeld) {
-      fPlayerPositionX = fPlayerPositionX + fPlayerVel * fElapsedTime;
-    }
-   if (GetKey(olc::Key::UP).bHeld) {
-      fPlayerPositionY = fPlayerPositionY - fPlayerVel * fElapsedTime;
-    }
-    if (GetKey(olc::Key::DOWN).bHeld) {
-      fPlayerPositionY = fPlayerPositionY + fPlayerVel * fElapsedTime;
-    }
+  if (GetKey(olc::Key::DOWN).bHeld)
+  {
+    fPlayerPositionY = fPlayerPositionY + fPlayerVel * fElapsedTime;
+  }
 
-    for (auto elm: vEnemy) {
-       if (elm.alive)
-          DrawSprite(elm.x, elm.y, sprEnemy.get());
-    }
-  return true;
+  for (auto elm: vEnemy)
+  {
+     if (elm.alive)
+       DrawSprite(elm.x, elm.y, sprEnemy.get());
+  }
+ return true;
 }
 ```
 
