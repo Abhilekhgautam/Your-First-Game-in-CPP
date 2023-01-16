@@ -415,7 +415,7 @@ pointer to object of type <code>olc::sprite</code>, the <code>get</code> method 
 <p>Next we will add some life to our player, i.e. we will add some movement to the
 player.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="adding-motion-to-player"><a class="header" href="#adding-motion-to-player">Adding Motion to Player</a></h1>
-<p>Now we are going to add life to our player, we will begin by adding motions to the player. But before we start writing some code let us look at the concept behing moving (translating) the player.</p>
+<p>Now we are going to add life to our player, we will begin by adding motions to the player. But before we start writing some code let us look at the concept behind moving (translating) the player.</p>
 <h2 id="translating-a-point"><a class="header" href="#translating-a-point">Translating a Point</a></h2>
 <p>Moving a player means we want to translate the player's position in the 2D plane.
 Consider a point in the 2D plane,<code>(x1, y1)</code>, now what will you do if you want the point to move by 5 units to the right?</p>
@@ -504,9 +504,9 @@ Let us Quickly bring changes to our code,</p>
     }
 </code></pre>
 <p>I grasp this as, if there is motion just multiply the speed by fElapsedTime and you should be fine.</p>
-<h2 id="the-player-doenot-move-now"><a class="header" href="#the-player-doenot-move-now">The Player Doenot Move Now</a></h2>
+<h2 id="the-player-doesnot-move-now"><a class="header" href="#the-player-doesnot-move-now">The Player Doesnot Move Now</a></h2>
 <p>No worries, we have set <code>fPlayerVel = 0.5</code> and the value of <code>fElapsedTime</code> is even smaller, so their product would be even smaller.</p>
-<p>To solve this simply increase the player's velocity
+<p>To solve this simply increase the player's velocity.
 You just need to update the value of <code>fPlayerVel</code>.</p>
 <pre><code class="language-cpp">    float fPlayerVel = 90.0f;
 </code></pre>
@@ -999,7 +999,7 @@ condition, we can say that they have collided.</p>
 </code></pre>
 <p>Above code justifies everything we talked earlier, nothing to explain here.
 We set <code>elm.alive = false</code> to kill the enemy. So now you should see
-enemies being killed on collion with the player.</p>
+enemies being killed on collision with the player.</p>
 <p>Till now your <code>OnUserUpdate</code> method should look like this:</p>
 <pre><code class="language-cpp">bool OnUserUpdate(float fElapsedTime) override
 {
@@ -1111,7 +1111,7 @@ A enemy is killed when</p>
 <pre><code class="language-cpp">life_count = life_count - 1;
 </code></pre>
 <h2 id="drawing-the-life-sprite"><a class="header" href="#drawing-the-life-sprite">Drawing the Life Sprite</a></h2>
-<p>We will use a the following sprite to represent the life count of a player</p>
+<p>We will use the sprite below to represent the life count of a player</p>
 <p><img src="chapter_10/../image/life.png" alt="Life Sprite" /></p>
 <p>First we need to create a private member variable, sprLife to store a pointer to object
 of type <code>olc::Sprite</code></p>
@@ -1159,6 +1159,22 @@ pointer to the object of type <code>olc::Sprite</code>.</p>
 
         </div>
 
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
 
 
 

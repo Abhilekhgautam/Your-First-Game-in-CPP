@@ -174,7 +174,7 @@ condition, we can say that they have collided.</p>
 </code></pre>
 <p>Above code justifies everything we talked earlier, nothing to explain here.
 We set <code>elm.alive = false</code> to kill the enemy. So now you should see
-enemies being killed on collion with the player.</p>
+enemies being killed on collision with the player.</p>
 <p>Till now your <code>OnUserUpdate</code> method should look like this:</p>
 <pre><code class="language-cpp">bool OnUserUpdate(float fElapsedTime) override
 {
@@ -285,6 +285,22 @@ for out Player.</p>
 
         </div>
 
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
 
 
 

@@ -172,7 +172,7 @@ A enemy is killed when</p>
 <pre><code class="language-cpp">life_count = life_count - 1;
 </code></pre>
 <h2 id="drawing-the-life-sprite"><a class="header" href="#drawing-the-life-sprite">Drawing the Life Sprite</a></h2>
-<p>We will use a the following sprite to represent the life count of a player</p>
+<p>We will use the sprite below to represent the life count of a player</p>
 <p><img src="../image/life.png" alt="Life Sprite" /></p>
 <p>First we need to create a private member variable, sprLife to store a pointer to object
 of type <code>olc::Sprite</code></p>
@@ -226,6 +226,22 @@ pointer to the object of type <code>olc::Sprite</code>.</p>
 
         </div>
 
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
 
 
 
