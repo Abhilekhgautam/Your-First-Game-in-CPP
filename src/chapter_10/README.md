@@ -34,4 +34,45 @@ So just add the following line where the above condition matches in the `OnUserU
 ```cpp
 life_count = life_count - 1;
 ```
+## Drawing the Life Sprite
+We will use a the following sprite to represent the life count of a player
 
+![Life Sprite](../image/life.png)
+
+First we need to create a private member variable, sprLife to store a pointer to object
+of type `olc::Sprite`
+
+```cpp
+std::unique_ptr<olc::Sprite> sprLife;
+```
+and then on `OnUserUpdate` method we assign `sprLife` as:
+```cpp
+bool OnUserCreate() override
+{
+  produceEnemy();
+  sprPlayer = std::make_unique<olc::Sprite>("/home/abhilekh/Downloads/player.png");
+  sprEnemy = std::make_unique<olc::Sprite>("/home/abhilekh/Downloads/enemy.png");
+  sprLife  = std::make_unique<olc::Sprite>("/home/abhilekh/Downloads/life.png");
+  
+  return true;
+}
+```
+
+To draw this sprite, we will use `DrawSprite` method, but the number of sprites to be displayed
+depends on the `life_count`, so will use a `for` loop here,
+
+```cpp
+// load life sprite..
+for (int i = 0; i < life_count; ++i) {
+  DrawSprite(270 + sprLife->width + 25 * i, 5, sprLife.get());
+}
+```
+We just passed in the `x`, `y` coordinate where the sprite is to be drawn and the
+pointer to the object of type `olc::Sprite`.
+
+Now if you compile and run the program, you should see something like this
+![Score and Life Demo](../image/life-score-demo.png)
+
+All the codes till now, can be found [here](https://gist.github.com/Abhilekhgautam/889718740c2628d4e571fd0edf6e2799)
+
+Next up we will work on polishing the game.
