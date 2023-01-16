@@ -1,6 +1,6 @@
 # Hello, OLC!
 
-It is time to write your first program using OLC game engine. How can we break the tradition, we will start by writing a simple Hello, World program.
+It is time to write your first program using olc::PixelGameEngine. How can we break the tradition, we will start by writing a simple Hello, World program.
 
 ## Creating a New Directory
 Begin by making a directory to store your Code. I'll name it 'Space Warrior' thats the name of the game we are going to create.
@@ -12,7 +12,7 @@ Begin by making a directory to store your Code. I'll name it 'Space Warrior' tha
    ```
 
 ## Adding the required Header
-We will then add the olcpixelgameengine.h header in our directory which you can download form the olcpixelgameengine github page.
+We will then add the olcPixelEamEengine.h header in our directory which you can download [here](https://github.com/OneLoneCoder/olcPixelGameEngine).
 
 ## Create a new cpp file
 We will now create a new cpp file I will name it main.cpp.
@@ -46,9 +46,9 @@ Now let us create a new class for our Game, `Game` it will inherit `olc::PixelGa
 
 	bool OnUserUpdate(float fElapsedTime) override
 	{
-	        Clear(olc::BLACK);
-		DrawString(5,5, "Hello, World");	
-		return true;
+	  Clear(olc::BLACK);
+	  DrawString(5,5, "Hello, World");	
+	  return true;
 	}
 };
 ``` 
@@ -69,7 +69,10 @@ int main()
 }
 ```
 
-That's it now if you run this program, you should see a window with string "Hello, World" being displayed.
+That's it now if you run this program, you should see a window with string "Hello, World" being displayed like this:
+
+![Hello OLC](../image/hello-olc.png)
+
 
 ## Getting into Details
  As mentioned earlier we inherited our class from `olc::PixelGameEngine` and then we override two functions,
@@ -80,3 +83,6 @@ That's it now if you run this program, you should see a window with string "Hell
 
  ### OnUserUpdate()
    This function is called repeatedly by the engine per frame. For smooth transition of the game, we need to keep updating the frame and whenever the frame is updated this function is called. We will talk about this in more details later.
+### The main function
+
+In the main Function, we first create an object game, of type Game. We then need to tell the olc::PixelGameEngine about the size of window we want to create we do so by using the`Construct` method. The `Construct` method returns `true` if the construction was successfull and then we call the `start` method which starts our game engine.
