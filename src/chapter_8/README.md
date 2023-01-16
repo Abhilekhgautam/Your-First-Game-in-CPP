@@ -60,17 +60,14 @@ x coordinate to the velocity, but in fact, what we really do is,
 ```
 X = X + Velocity * cos(theta)
 ```
-Where `theta` = angle between x-axis and the direction we move in.
-### But why cos(theta)?
-This is because, `Velocity * Cos(theta)` is said to be horizontal
-component of the velocity which is responsible for the horizontal
-movement.
+Where `theta` = angle between x-axis and the direction we move in, which is 0.
 
 so, X turns out to be,
 ```
 X = X + Velocity * cos(0)
   = X + Velocity
 ```
+
 Similarly for the vertical movement,
 ![Vertical Movement](../image/vertical-component.png)
 
