@@ -142,39 +142,43 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="working-with-time"><a class="header" href="#working-with-time">Working with Time</a></h1>
-<p>Time is an important concept in games, In games we give players the illusion of movement, In fact we are displaying them the static images, to do so we keep repositioning image throughout the screen.</p>
+<p>Time is an important concept in a game, In a game we give players the illusion of movement, But in fact we are just displaying them the static images, We keep repositioning image throughout the screen which creates the illusion of movement.</p>
 <p>We know that,</p>
 <p>Speed = Distance travelled / Time Taken</p>
 <p>which implies that,</p>
 <p>Distance Travelled = Speed * Time Taken</p>
 <p>So to calculate the distance travelled by any object we should know about its speed and the time that has passed.</p>
-<p>A parameter <code>fElapsedTime</code> is passed a parameter to <code>OnUserUpdate</code> function which is the previous frame duration in seconds.</p>
-<p>So to handle time properly we have to multiply the speed by fElapsedTime.
+<p>A parameter <code>fElapsedTime</code> is passed as a  parameter to <code>OnUserUpdate</code> function which is the previous frame duration in seconds.</p>
+<p>So to handle time properly in our game we have to multiply the speed of moving object by <code>fElapsedTime</code>.
 Let us Quickly bring changes to our code,</p>
 <pre><code class="language-cpp">bool OnUserUpdate(float fElapsedTime) override
-    {
-        DrawSprite(fPlayerPositionX, fPlayerPositionY, sprPlayer.get());
-        if (GetKey(olc::Key::LEFT).bHeld) {
-                fPlayerPositionX = fPlayerPositionX - fPlayerVel * fElapsedTime;
-        }
-        if (GetKey(olc::Key::RIGHT).bHeld) {
-                fPlayerPositionX = fPlayerPositionX + fPlayerVel * fElapsedTime;
-        }
-        if (GetKey(olc::Key::UP).bHeld) {
-            fPlayerPositionY = fPlayerPositionY - fPlayerVel * fElapsedTime;
-        }
-        if (GetKey(olc::Key::DOWN).bHeld) {
-                fPlayerPositionY = fPlayerPositionY + fPlayerVel * fElapsedTime;
-        }
-        return true;
-    }
+{
+  DrawSprite(fPlayerPositionX, fPlayerPositionY, sprPlayer.get());
+  if (GetKey(olc::Key::LEFT).bHeld)
+  {
+     fPlayerPositionX = fPlayerPositionX - fPlayerVel * fElapsedTime;
+  }
+  if (GetKey(olc::Key::RIGHT).bHeld)
+  {
+     fPlayerPositionX = fPlayerPositionX + fPlayerVel * fElapsedTime;
+  }
+  if (GetKey(olc::Key::UP).bHeld) 
+  {
+     fPlayerPositionY = fPlayerPositionY - fPlayerVel * fElapsedTime;
+  }
+  if (GetKey(olc::Key::DOWN).bHeld)
+  {
+     fPlayerPositionY = fPlayerPositionY + fPlayerVel * fElapsedTime;
+  }
+  return true;
+}
 </code></pre>
-<p>I grasp this as, if there is motion just multiply the speed by fElapsedTime and you should be fine.</p>
+<p>You should just remember that, if there is any motion just multiply the speed by <code>fElapsedTime</code> and you should be fine.</p>
 <h2 id="the-player-doesnot-move-now"><a class="header" href="#the-player-doesnot-move-now">The Player Doesnot Move Now</a></h2>
-<p>No worries, we have set <code>fPlayerVel = 0.5</code> and the value of <code>fElapsedTime</code> is even smaller, so their product would be even smaller.</p>
+<p>No worries, we have set <code>fPlayerVel = 0.5</code> and the value of <code>fElapsedTime</code> is very small, so their product would be even smaller.</p>
 <p>To solve this simply increase the player's velocity.
 You just need to update the value of <code>fPlayerVel</code>.</p>
-<pre><code class="language-cpp">    float fPlayerVel = 90.0f;
+<pre><code class="language-cpp">float fPlayerVel = 90.0f;
 </code></pre>
 <p>A value of <code>90</code> should work fine, if that didn't worked just try some other values.</p>
 <p>Next up we will add enemies to our game. Stay Tuned.</p>
