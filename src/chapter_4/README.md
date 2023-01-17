@@ -42,7 +42,7 @@ bool OnUserUpdate(float fElapsedTime) override
 
 You should just remember that, if there is any motion just multiply the speed by `fElapsedTime` and you should be fine.
 
-## The Player Doesnot Move Now
+## The Player Doesn't Move Now
 
 No worries, we have set `fPlayerVel = 0.5` and the value of `fElapsedTime` is very small, so their product would be even smaller.
 
