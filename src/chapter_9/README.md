@@ -6,7 +6,8 @@ the enemy and player.
 The concepts and techniques are similar as before,
 ![Collision between Enemy and Player](../image/collision-enemy-player.png)
 
-I won't be explaining too much, If you are still confused head back to chapter-7, where I explained in detail about the collision detection.
+I won't be explaining too much, If you are still confused head back to [chapter 7](https://abhilekhgautam.github.io/Your-First-Game-in-CPP/book/chapter_7/index.html), 
+where I explained in detail about the collision detection.
 
 ## The conditions
 * `x + sprEnemy->width >= x1`
