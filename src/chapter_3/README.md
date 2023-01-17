@@ -1,5 +1,5 @@
 # Adding Motion to Player
-Now we are going to add life to our player, we will begin by adding motions to the player. But before we start writing some code let us look at the concept behind moving (translating) the player.
+Now we are going to add life to our player, we will begin by adding motion to the player. But before we start writing some code let us look at the concept behind moving (translating) the player.
 
 ## Translating a Point
  
@@ -45,7 +45,7 @@ variable representing the speed of player.
 class Game: public olc::PixelGameEngine{
 // same as before
 private:
-  //same as befor
+  //same as before
   float fPlayerVel = 0.5;
 };
 ```
@@ -77,4 +77,5 @@ bool OnUserUpdate(float fElapsedTime) override
 ```
 
 I don't think we need any explanation here, we just applied the same translation technique we learnt earlier.
-Once you compile and run the code, we should be able to move the player now.
+Once you compile and run the code, you should be able to move the player now.
+Next up we will look at managing time in our game.
