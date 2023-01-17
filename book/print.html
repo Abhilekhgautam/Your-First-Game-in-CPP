@@ -415,7 +415,7 @@ pointer to object of type <code>olc::sprite</code>, the <code>get</code> method 
 <p>Next we will add some life to our player, i.e. we will add some movement to the
 player.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="adding-motion-to-player"><a class="header" href="#adding-motion-to-player">Adding Motion to Player</a></h1>
-<p>Now we are going to add life to our player, we will begin by adding motions to the player. But before we start writing some code let us look at the concept behind moving (translating) the player.</p>
+<p>Now we are going to add life to our player, we will begin by adding motion to the player. But before we start writing some code let us look at the concept behind moving (translating) the player.</p>
 <h2 id="translating-a-point"><a class="header" href="#translating-a-point">Translating a Point</a></h2>
 <p>Moving a player means we want to translate the player's position in the 2D plane.
 Consider a point in the 2D plane,<code>(x1, y1)</code>, now what will you do if you want the point to move by 5 units to the right?</p>
@@ -445,7 +445,7 @@ variable representing the speed of player.</p>
 <pre><code class="language-cpp">class Game: public olc::PixelGameEngine{
 // same as before
 private:
-  //same as befor
+  //same as before
   float fPlayerVel = 0.5;
 };
 </code></pre>
@@ -474,7 +474,8 @@ private:
 }
 </code></pre>
 <p>I don't think we need any explanation here, we just applied the same translation technique we learnt earlier.
-Once you compile and run the code, we should be able to move the player now.</p>
+Once you compile and run the code, you should be able to move the player now.
+Next up we will look at managing time in our game.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="working-with-time"><a class="header" href="#working-with-time">Working with Time</a></h1>
 <p>Time is an important concept in a game, In a game we give players the illusion of movement, But in fact we are just displaying them the static images, We keep repositioning image throughout the screen which creates the illusion of movement.</p>
 <p>We know that,</p>
