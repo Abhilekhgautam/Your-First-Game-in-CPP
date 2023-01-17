@@ -40,4 +40,4 @@ enemies being killed on collision with the player.
 All the updated code for `OnUserUpdate` method can be found [here](https://gist.github.com/Abhilekhgautam/bba81f6ed5294ad4038d6538fe94b9fc)
 
 Next up we will add Scoreboard and implement the concept of life
-for out Player.
+for our Player.
