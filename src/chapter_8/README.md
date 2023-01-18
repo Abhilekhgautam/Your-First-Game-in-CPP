@@ -10,9 +10,7 @@ Since the enemy will be moving towards the player, we need to determine the path
 
 To calculate the hypo (hypotenuse), we can use pythagoras theorem as,
 
-```
-hypo = sqrt(tempY^2 + tempX^2)
-```
+\\(\ hypo = \sqrt{(tempY)^2 + (tempX)^2} \\)
 
 `tempX` and `tempY` can be calculated as:
 ```cpp
