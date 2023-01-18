@@ -4,3 +4,5 @@ language = "en"
 multilingual = false
 src = "src"
 title = "Write your First Game in C++"
+[output.html]
+mathjax-support = true
