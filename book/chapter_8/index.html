@@ -30,6 +30,8 @@
 
         <!-- Custom theme stylesheets -->
 
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </head>
     <body>
         <!-- Provide site root to javascript -->
@@ -148,8 +150,7 @@
 <p><img src="../image/pythagoras-theorem.png" alt="The Pythagoras Theorem" /></p>
 <p><code>tempY</code> is the vertical distance between the enemy and the player while <code>tempX</code> is the horizontal distance between the enemy and player.</p>
 <p>To calculate the hypo (hypotenuse), we can use pythagoras theorem as,</p>
-<pre><code>hypo = sqrt(tempY^2 + tempX^2)
-</code></pre>
+<p>\(\ hypo = \sqrt{(tempY)^2 + (tempX)^2} \)</p>
 <p><code>tempX</code> and <code>tempY</code> can be calculated as:</p>
 <pre><code class="language-cpp">tempX = x1 - (x + sprEnemey-&gt;width / 2);
 
