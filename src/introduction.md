@@ -1,8 +1,5 @@
 # Introduction
- Welcome to *Write your First Game in C++*. The main objective of this book is to have some fun with C++. C++ is considered to be difficult and boring by many. The reason to find it boring is many universities (in Nepal) are teaching C++98/03 and are bounding them in writing console based programs which brings the vibe that C++ is useless among many.
+Welcome to *Write Your First Game in C++*! The goal of this book is to show that programming with C++ can be fun and engaging. Despite its reputation as a difficult language, C++ is a powerful tool that can be used to create a wide variety of programs. Unfortunately, many universities in Nepal teach outdated versions of C++ (such as C++98/03) and primarily focus on console-based programs, which can give the impression that C++ is not useful. This book aims to change that perception and demonstrate the capabilities of C++ by guiding you through the process of creating your own game. It is also an excellent resource for anyone looking to learn C++ and programming in general.
 
- This book is to remind you that C++ is not boring at all. You will see why soon. This book also aims
- to serve as as a teaching (learning) material, for those who want to start having fun with C++ and programming overall.
-
- ## Who is this book for?
+## Who is this book for?
  This book is intended for everyone who wish to have fun with C++.
