@@ -83,7 +83,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="index.html">Write your First Game in C++</a></li><li class="chapter-item expanded affix "><a href="foreword.html">Foreword</a></li><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="chapter_1/index.html"><strong aria-hidden="true">1.</strong> Getting Started</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_1/hello_olc.html"><strong aria-hidden="true">1.1.</strong> Hello OLC</a></li><li class="chapter-item expanded "><a href="chapter_1/drawing_shape.html"><strong aria-hidden="true">1.2.</strong> Drawing Shape</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_2/index.html"><strong aria-hidden="true">2.</strong> Adding Our Player</a></li><li class="chapter-item expanded "><a href="chapter_3/index.html"><strong aria-hidden="true">3.</strong> Adding Motion to Player</a></li><li class="chapter-item expanded "><a href="chapter_4/index.html"><strong aria-hidden="true">4.</strong> Working with Time</a></li><li class="chapter-item expanded "><a href="chapter_5/index.html"><strong aria-hidden="true">5.</strong> Adding Enemies to Game</a></li><li class="chapter-item expanded "><a href="chapter_6/index.html"><strong aria-hidden="true">6.</strong> Shooting the Bullets</a></li><li class="chapter-item expanded "><a href="chapter_7/index.html"><strong aria-hidden="true">7.</strong> Collision Detection - I</a></li><li class="chapter-item expanded "><a href="chapter_8/index.html"><strong aria-hidden="true">8.</strong> Adding Life to the Enemy</a></li><li class="chapter-item expanded "><a href="chapter_9/index.html"><strong aria-hidden="true">9.</strong> Collision Detection - II</a></li><li class="chapter-item expanded "><a href="chapter_10/index.html"><strong aria-hidden="true">10.</strong> Scoreboard and the Concept of Life</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="index.html">Write your First Game in C++</a></li><li class="chapter-item expanded affix "><a href="foreword.html">Foreword</a></li><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="chapter_1/index.html"><strong aria-hidden="true">1.</strong> Getting Started</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_1/hello_olc.html"><strong aria-hidden="true">1.1.</strong> Hello OLC</a></li><li class="chapter-item expanded "><a href="chapter_1/drawing_shape.html"><strong aria-hidden="true">1.2.</strong> Drawing Shape</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_2/index.html"><strong aria-hidden="true">2.</strong> Adding Our Player</a></li><li class="chapter-item expanded "><a href="chapter_3/index.html"><strong aria-hidden="true">3.</strong> Adding Motion to Player</a></li><li class="chapter-item expanded "><a href="chapter_4/index.html"><strong aria-hidden="true">4.</strong> Working with Time</a></li><li class="chapter-item expanded "><a href="chapter_5/index.html"><strong aria-hidden="true">5.</strong> Adding Enemies to Game</a></li><li class="chapter-item expanded "><a href="chapter_6/index.html"><strong aria-hidden="true">6.</strong> Shooting the Bullets</a></li><li class="chapter-item expanded "><a href="chapter_7/index.html"><strong aria-hidden="true">7.</strong> Collision Detection - I</a></li><li class="chapter-item expanded "><a href="chapter_8/index.html"><strong aria-hidden="true">8.</strong> Adding Life to the Enemy</a></li><li class="chapter-item expanded "><a href="chapter_9/index.html"><strong aria-hidden="true">9.</strong> Collision Detection - II</a></li><li class="chapter-item expanded "><a href="chapter_10/index.html"><strong aria-hidden="true">10.</strong> Scoreboard and the Concept of Life</a></li><li class="chapter-item expanded "><a href="chapter_11/index.html"><strong aria-hidden="true">11.</strong> Reviewing Our Code</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -970,6 +970,184 @@ pointer to the object of type <code>olc::Sprite</code>.</p>
 <img src="chapter_10/../image/life-score-demo.png" alt="Score and Life Demo" /></p>
 <p>All the codes till now, can be found <a href="https://gist.github.com/Abhilekhgautam/889718740c2628d4e571fd0edf6e2799">here</a></p>
 <p>Next up we will work on polishing the game.</p>
+<div style="break-before: page; page-break-before: always;"></div><p>Congratulations, You have successfully writen your first game.</p>
+<h2 id="whats-next"><a class="header" href="#whats-next">What's Next?</a></h2>
+<p>Writing good code was never the aim of this book, but good code is what we all need. Lets see how we can make our code better.</p>
+<h2 id="what-can-we-improve"><a class="header" href="#what-can-we-improve">What can we improve?</a></h2>
+<p>The list is pretty long but we will only  discuss what I really hate (very much) about this code. </p>
+<p>Let us start from our struct definition,</p>
+<h3 id="intoducing-a-entity-struct"><a class="header" href="#intoducing-a-entity-struct">Intoducing a Entity Struct.</a></h3>
+<p>We defined two struct one to represent the Enemy</p>
+<pre><code class="language-cpp">struct Enemy{
+    float x;
+    float y;
+    bool alive;
+};
+</code></pre>
+<p>and other to represent Bullets</p>
+<pre><code class="language-cpp">struct Bullet{
+  float x;
+  float y;
+  bool dead;
+};
+</code></pre>
+<p>Look at those fields, aren't they same. Can we not define a single struct for both of them. After all they both represent a Entity in our game, then why not have a single struct for them as:</p>
+<pre><code class="language-cpp">struct Entity {
+   float x;
+   float y;
+   bool alive;
+};
+</code></pre>
+<p>Then how can we distinguish between an enemy and a bullet? Probably you could add a new field in the struct that represents the type of Entity as:</p>
+<pre><code class="language-cpp">struct Entity{
+ //snip
+ std::string entity_type;
+};
+</code></pre>
+<p>And then our constructor for Entity takes a string as parameter.</p>
+<pre><code class="language-cpp">Entity::Entity(std::string e_type){
+  if (e_type == &quot;Bullet&quot;){
+    // some error handling stuff...
+    
+    // create a bullet
+  }
+  // similar thing for our enemy.
+}
+</code></pre>
+<p>This way we will just need to have a single Vector (Vector of Entity) instead of two and we can check for either enemy or bullet as:</p>
+<pre><code class="language-cpp">for(auto &amp;elm : vEntity){
+   if (elm.entity_type == &quot;Bullet&quot;){
+    // do whatever you want to do with bullet
+
+   }
+   // similar things ...
+}
+</code></pre>
+<h3 id="improving-the-produceenemy-function"><a class="header" href="#improving-the-produceenemy-function">Improving the produceEnemy function</a></h3>
+<p>At the moment our <code>produceEnemy</code> function is:</p>
+<pre><code class="language-cpp"> void produceEnemy() {
+   for (int i = 0; i &lt; 70; ++i) {
+    if (i &lt; 18)
+        vEnemy.emplace_back(Enemy{float(ScreenWidth()) / 2 + (float) i * 10 - 100, 40.0f, true});
+    else if (i &lt; 36)
+        vEnemy.emplace_back(Enemy{float(ScreenWidth()) / 2 + 10.0f * (float) i - 280, 55.0f, true});
+    else if (i &lt; 54)
+        vEnemy.emplace_back(Enemy{float(ScreenWidth()) / 2 + 10.0f * (float) i - 460, 75.0f, true});
+    else
+        vEnemy.emplace_back(Enemy{float(ScreenWidth()) / 2 + 10.0f * (float) i - 640, 95.0f, true});
+    }
+}
+</code></pre>
+<p>Do you see all those hard-coded integers there, they are bad, very very bad. Lets see how we can improve this, 
+the integer literals we are using in every if statements actually is ensuring that there are exactly 18 enemies per row being displayed.
+So what we can do is use create a new variable and use it.</p>
+<pre><code class="language-cpp">int enemies_per_row = 18;
+
+void produceEnemy(){
+  for(//...){
+  if (i &lt; enemies_per_row){
+   // do sth
+   }
+  else if (i &lt; 2 * enemies_per_row){
+    // do sth
+   }
+  }
+
+}
+</code></pre>
+<p>furthermore, statements like this are very unreadable</p>
+<pre><code class="language-cpp"> vEnemy.emplace_back(Enemy{float(ScreenWidth()) / 2 + (float) i * 10 - 100, 40.0f, true});
+</code></pre>
+<p>While we create any Entity either an enemy or a bullet, we need to know the Coordinate for those entities.
+So why not make our constructor take <code>positions</code> and <code>entity_type</code> as parameter.`</p>
+<pre><code class="language-cpp">Entity::Entity(float x, float y, std::string e_type){
+  // create entity...
+}
+</code></pre>
+<p>and insert it into the vector as,</p>
+<pre><code class="language-cpp">vEntity.emplace_back(Entity(x_position, y_position, &quot;Enemy&quot;));
+</code></pre>
+<p>Somewhat cleaner? I hope you agree.</p>
+<h3 id="cleaning-up-onuserupdate-function"><a class="header" href="#cleaning-up-onuserupdate-function">Cleaning up OnUserUpdate function</a></h3>
+<p>Everything inside a single function is a big NOOO but that is what we have done with our <code>OnUserUpdate</code> function.
+What we can do is, split the logic inside multiple functions, like we can add a new function that only handles user input as : </p>
+<pre><code class="language-cpp">void handle_input(){
+  if (GetKey(olc::Key::LEFT).bHeld) {
+      fPlayerPositionX = fPlayerPositionX - fPlayerVel * fElapsedTime;
+   }
+   if (GetKey(olc::Key::RIGHT).bHeld) {
+      fPlayerPositionX = fPlayerPositionX + fPlayerVel * fElapsedTime;
+   }
+   if (GetKey(olc::Key::UP).bHeld) {
+      fPlayerPositionY = fPlayerPositionY - fPlayerVel * fElapsedTime;
+    }
+   if (GetKey(olc::Key::DOWN).bHeld) {
+      fPlayerPositionY = fPlayerPositionY + fPlayerVel * fElapsedTime;
+    }
+   if (GetKey(olc::Key::SPACE).bPressed) {
+       float ftempX = fPlayerPositionX;
+       float ftempY = fPlayerPositionY;
+       vBullet.emplace_back(Bullet{ftempX + float(sprPlayer-&gt;width) / 2, ftempY, false});
+   }
+}
+</code></pre>
+<p>and then calling it inside our <code>OnUserUpdate</code> function as:</p>
+<pre><code class="language-cpp">bool OnUserUpdate(float fElapsedTime) override
+{
+// same as before
+   
+   handle_input();
+
+// same as before...
+}
+</code></pre>
+<p>Similarly you can add a new function that is just dedicated for collision detection and you can just call that inside <code>OnUserUpdate</code> function.</p>
+<h3 id="dont-repeat-youself"><a class="header" href="#dont-repeat-youself">Don't repeat youself</a></h3>
+<p>If you didn't follow my earlier suggestion of adding a new function for collision detection then this is a must have for you.
+If you look at our <code>OnUserUpdate</code> function you can clearly see we are repeating ourself,</p>
+<p>This thing is for drawing alive enemy to the screen.</p>
+<pre><code class="language-cpp">for (auto elm: vEnemy) {
+   if (elm.alive)
+     DrawSprite(elm.x, elm.y, sprEnemy.get());
+}
+</code></pre>
+<p>and another similar construct for moving our enemy towards the player,</p>
+<pre><code class="language-cpp">for(auto &amp;elm : vEnemy){
+    if(elm.alive){
+         float tempX = ((fPlayerPositionX + float(sprPlayer-&gt;width) / 2
+            ) - elm.x + float(sprEnemy-&gt;height) + float(sprEnemy-&gt;width) / 2
+        );
+       float tempY = (fPlayerPositionY - elm.y + float(sprEnemy-&gt;height));
+
+      // snip
+    }
+ }
+</code></pre>
+<p>Why not merge these two into one?</p>
+<pre><code class="language-cpp">for(auto &amp;elm : vEntity){
+  if(elm.alive &amp;&amp; elm.entity_type == &quot;Enemy&quot;){
+    DrawSprite(elm.x, elm.y, sprEnemy.get());
+    float tempX = ((fPlayerPositionX + float(sprPlayer-&gt;width) / 2
+    ) - elm.x + float(sprEnemy-&gt;height) + float(sprEnemy-&gt;width) / 2
+    );
+    float tempY = (fPlayerPositionY - elm.y + float(sprEnemy-&gt;height));
+  }
+}
+</code></pre>
+<p>Do you see more of these kind, just merge them.</p>
+<h3 id="stay-consistent"><a class="header" href="#stay-consistent">Stay Consistent</a></h3>
+<p>This might sound simple and easy, but you need to be consistent with your naming convention.</p>
+<ul>
+<li>Do your variable name follow same pattern?</li>
+<li>Do your function name follow same pattern?</li>
+</ul>
+If your answer to any of these is a No, go and improve that.
+<h3 id="splitting-into-multiple-files"><a class="header" href="#splitting-into-multiple-files">Splitting into multiple files</a></h3>
+<p>Do you feel like this is too much inside a single file, feel free to split the program into multiple files.
+Everything inside a single file is also a big no and you should try avoiding that. But it is ok for simple 
+projects like this.</p>
+<h2 id="thats-it"><a class="header" href="#thats-it">That's It</a></h2>
+<p>There might still be lots of things to improve but those were the things I really wanted to talk about.</p>
 
                     </main>
 
@@ -988,6 +1166,22 @@ pointer to the object of type <code>olc::Sprite</code>.</p>
 
         </div>
 
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
 
 
 
