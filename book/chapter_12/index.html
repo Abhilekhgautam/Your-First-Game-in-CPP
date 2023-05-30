@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Collision Detection - I - Write your First Game in C++</title>
+        <title>Final Words - Write your First Game in C++</title>
 
 
         <!-- Custom HTML head -->
@@ -82,7 +82,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../index.html">Write your First Game in C++</a></li><li class="chapter-item expanded affix "><a href="../foreword.html">Foreword</a></li><li class="chapter-item expanded affix "><a href="../introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="../chapter_1/index.html"><strong aria-hidden="true">1.</strong> Getting Started</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_1/hello_olc.html"><strong aria-hidden="true">1.1.</strong> Hello OLC</a></li><li class="chapter-item expanded "><a href="../chapter_1/drawing_shape.html"><strong aria-hidden="true">1.2.</strong> Drawing Shape</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_2/index.html"><strong aria-hidden="true">2.</strong> Adding Our Player</a></li><li class="chapter-item expanded "><a href="../chapter_3/index.html"><strong aria-hidden="true">3.</strong> Adding Motion to Player</a></li><li class="chapter-item expanded "><a href="../chapter_4/index.html"><strong aria-hidden="true">4.</strong> Working with Time</a></li><li class="chapter-item expanded "><a href="../chapter_5/index.html"><strong aria-hidden="true">5.</strong> Adding Enemies to Game</a></li><li class="chapter-item expanded "><a href="../chapter_6/index.html"><strong aria-hidden="true">6.</strong> Shooting the Bullets</a></li><li class="chapter-item expanded "><a href="../chapter_7/index.html" class="active"><strong aria-hidden="true">7.</strong> Collision Detection - I</a></li><li class="chapter-item expanded "><a href="../chapter_8/index.html"><strong aria-hidden="true">8.</strong> Adding Life to the Enemy</a></li><li class="chapter-item expanded "><a href="../chapter_9/index.html"><strong aria-hidden="true">9.</strong> Collision Detection - II</a></li><li class="chapter-item expanded "><a href="../chapter_10/index.html"><strong aria-hidden="true">10.</strong> Scoreboard and the Concept of Life</a></li><li class="chapter-item expanded "><a href="../chapter_11/index.html"><strong aria-hidden="true">11.</strong> Reviewing Our Code</a></li><li class="chapter-item expanded "><a href="../chapter_12/index.html"><strong aria-hidden="true">12.</strong> Final Words</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../index.html">Write your First Game in C++</a></li><li class="chapter-item expanded affix "><a href="../foreword.html">Foreword</a></li><li class="chapter-item expanded affix "><a href="../introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="../chapter_1/index.html"><strong aria-hidden="true">1.</strong> Getting Started</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_1/hello_olc.html"><strong aria-hidden="true">1.1.</strong> Hello OLC</a></li><li class="chapter-item expanded "><a href="../chapter_1/drawing_shape.html"><strong aria-hidden="true">1.2.</strong> Drawing Shape</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_2/index.html"><strong aria-hidden="true">2.</strong> Adding Our Player</a></li><li class="chapter-item expanded "><a href="../chapter_3/index.html"><strong aria-hidden="true">3.</strong> Adding Motion to Player</a></li><li class="chapter-item expanded "><a href="../chapter_4/index.html"><strong aria-hidden="true">4.</strong> Working with Time</a></li><li class="chapter-item expanded "><a href="../chapter_5/index.html"><strong aria-hidden="true">5.</strong> Adding Enemies to Game</a></li><li class="chapter-item expanded "><a href="../chapter_6/index.html"><strong aria-hidden="true">6.</strong> Shooting the Bullets</a></li><li class="chapter-item expanded "><a href="../chapter_7/index.html"><strong aria-hidden="true">7.</strong> Collision Detection - I</a></li><li class="chapter-item expanded "><a href="../chapter_8/index.html"><strong aria-hidden="true">8.</strong> Adding Life to the Enemy</a></li><li class="chapter-item expanded "><a href="../chapter_9/index.html"><strong aria-hidden="true">9.</strong> Collision Detection - II</a></li><li class="chapter-item expanded "><a href="../chapter_10/index.html"><strong aria-hidden="true">10.</strong> Scoreboard and the Concept of Life</a></li><li class="chapter-item expanded "><a href="../chapter_11/index.html"><strong aria-hidden="true">11.</strong> Reviewing Our Code</a></li><li class="chapter-item expanded "><a href="../chapter_12/index.html" class="active"><strong aria-hidden="true">12.</strong> Final Words</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -146,72 +146,20 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="collision-detection---i"><a class="header" href="#collision-detection---i">Collision Detection - I</a></h1>
-<p>So far so good, we have a player that can move and shoot bullets. We also have enemy that pose threats to the player, the player needs to kill the enemy with the help of the bullets. So will be implementing this.</p>
-<p>To kill the enemy we need to find out whether the bullet collided with the enemy or not.
-This is gonna be one of the tricky part of the entire program, But no problem I will try to explain everything.</p>
-<h2 id="detecting-the-collision"><a class="header" href="#detecting-the-collision">Detecting the collision</a></h2>
-<p>It might sound simple but when the coordinate of both bullets and the enemy are same they will collide. That's right but not totally, this is because our enemy has width and touching any part of that enemy should be considered as a collision.</p>
-<p>Let us first look at the image below:
-<img src="../image/sprite-demo.png" alt="sprite-demo" /></p>
-<p>Colliding with such enemy means, the x coordinate of the bullet can have the value in the range from, enemy's <code>x</code> to <code>x + sprEnemy-&gt;width</code>.</p>
-<p>But the bullet can be thought of a circle bounded inside a rectangle, in such way our bullet will also have a width and height.</p>
-<p><img src="../image/circle-demo.png" alt="circle-demo" /></p>
-<p>So For collision, </p>
-<ul>
-<li><code>Bullet.y -  1 &gt;= Enemy.y + sprEnemy-&gt;height</code>, this means that the top most point of our bullet is in the same level or above <code>y + sprEnemy-&gt;height</code>
-But this is not the only case, as:</li>
-</ul>
-<p><img src="../image/no-collision-for-same-y.png" alt="no-collision-for-same-y" /></p>
-<p>The above image matches the above condition, but this is not the condition for collision, we have to check for the <code>x</code> coordinate as well.</p>
-<ul>
-<li><code>Bullet.x + 1 &gt;= Enemy.x</code>, this means that the extreme right point of the bullet must be greater than Enemy's <code>x</code> coordinate.
-But this is also not the only case, as:</li>
-</ul>
-<p><img src="../image/no-collision-for-greater-x.png" alt="no-collsion-for-greater-x" /></p>
-<p>For the collision to take place (in X), we have to bound the extreme points of the bullet within <code>Enemy.x</code> to <code>Enemy.x + sprEnemy-&gt;width</code></p>
-<p>To do so, we should set the condition for left extreme point as well</p>
-<ul>
-<li><code>Bullet.x - 1 &lt;= Enemy.x + sprEnemy-&gt;width</code>. But this is not the only condtion.</li>
-</ul>
-<p><img src="../image/no-collision-for-smaller-x.png" alt="no-collision-for-smaller-x" /></p>
-<p>If we combine all these three condition, we will be able to detect the collision.</p>
-<p>Combining all these three conditions we get</p>
-<ul>
-<li><code>Bullet.y - 1 &gt;= Enemy.y + sprEnemy-&gt;height</code></li>
-<li><code>Bullet.x + 1 &gt;= Enemy.x</code></li>
-<li><code>Bullet.x - 1 &lt;= Enemy.x + sprEnemy-&gt;width</code></li>
-</ul>
-<h2 id="implementing-the-collision"><a class="header" href="#implementing-the-collision">Implementing the Collision</a></h2>
-<p>Too much talk, now lets see some code in action, add the following line to the
-<code>OnUserUpdate</code> method</p>
-<pre><code class="language-cpp">for (auto &amp;elm: vBullet) {
-  for (auto &amp;enemy: vEnemy) {
-     if (!elm.dead &amp;&amp; enemy.alive &amp;&amp; elm.y &gt; enemy.y &amp;&amp; elm.x + 1 &gt;= enemy.x &amp;&amp;
-         elm.x - 1 &lt;= enemy.x + float(sprEnemy-&gt;width) &amp;&amp;
-         elm.y - 1 &lt;= enemy.y + float(sprEnemy-&gt;height)) {
-            // kill both bullet and enemy.
-            elm.dead = true;
-            enemy.alive = false;
-        }
-     }
-}
-</code></pre>
-<p>We used a nested loop because we have to check the collision for each element against each enemy.</p>
-<p>Now you should see the player killing the enemy, but enemies are very weak for us now.</p>
-<p>Next up we will give life to our enemy.</p>
+                        <h1 id="final-words"><a class="header" href="#final-words">Final Words</a></h1>
+<p>C++ is a very challenging language to learn. I always take programming as fun, everybody should enjoy programming. But the problem is most beginner coding projects with C++ won't be interesting, and the interesting ones are too difficult to implement. So, this book aimed to help writing C++ without caring anything about performance and all other issue.</p>
+<p>I hope I've helped you moving around with C++.</p>
+<p>Hope you had fun.</p>
+<p>If you have anything to ask, you can always reach to me on twitter: <a href="https://twitter.com/abhilekh_gautam">Abhilekh Gautam</a></p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../chapter_6/index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../chapter_11/index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next" href="../chapter_8/index.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                                <i class="fa fa-angle-right"></i>
-                            </a>
 
                         <div style="clear: both"></div>
                     </nav>
@@ -219,13 +167,10 @@ But this is also not the only case, as:</li>
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../chapter_6/index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../chapter_11/index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next" href="../chapter_8/index.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                        <i class="fa fa-angle-right"></i>
-                    </a>
             </nav>
 
         </div>

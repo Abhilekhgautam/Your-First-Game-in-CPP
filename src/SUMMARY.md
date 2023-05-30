@@ -16,3 +16,4 @@
 - [Collision Detection - II](./chapter_9/README.md)
 - [Scoreboard and the Concept of Life](./chapter_10/README.md)
 - [Reviewing Our Code](./chapter_11/README.md)
+- [Final Words](./chapter_12/README.md)
